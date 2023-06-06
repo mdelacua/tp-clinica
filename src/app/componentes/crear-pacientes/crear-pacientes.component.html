@@ -1,0 +1,103 @@
+<form [formGroup]="form" id="iniciarSesionForm">
+    <div style="display: flex;">
+
+        <div style="width: 50%;">
+            <div>
+                <input type="text" id="user" class="fadeIn second" formControlName="nombre" name="user" placeholder="Nombre">            
+            </div>
+            <div>
+                <!--<small *ngIf="nombre.errors?.['required']">*Campo requerido</small>-->
+                <small *ngIf="nombre.errors?.['errorGenerico']">{{nombre.errors?.['errorGenerico'].msj}}</small>
+            </div>
+        </div>
+        <div style="width: 50%;">
+            <div>
+                <input type="text" id="user" class="fadeIn second" formControlName="apellido" name="user" placeholder="Apellido">            
+            </div>
+            <div>
+                <small *ngIf="apellido.errors?.['errorGenerico']">{{apellido.errors?.['errorGenerico'].msj}}</small>
+               
+            </div>
+        </div>
+    </div>
+    <div style="display: flex;">
+
+        <div style="width: 50%;">
+            <div>
+                <input type="text" id="user" class="fadeIn second" formControlName="edad" name="user" placeholder="Edad">            
+            </div>
+            <div>
+                
+                <small *ngIf="edad.errors?.['errorGenerico']">{{edad.errors?.['errorGenerico'].msj}}</small>
+            </div>
+        </div>
+        <div style="width: 50%;">
+            <div>
+                <input type="text" id="dni" class="fadeIn second" formControlName="dni" name="dni" placeholder="DNI">            
+            </div>
+            <div>
+                <small *ngIf="dni.errors?.['required']">*Campo requerido</small>
+                <small *ngIf="dni.errors?.['errorGenerico']">{{dni.errors?.['errorGenerico'].msj}}</small>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: flex;">
+
+        <div style="width: 50%;">
+            <div>
+                <input type="password" id="user" class="fadeIn second" formControlName="password" name="user" placeholder="Password">            
+            </div>
+            <div>
+                <small *ngIf="password.errors?.['errorGenerico']">{{password.errors?.['errorGenerico'].msj}}</small>
+            </div>
+        </div>
+        <div style="width: 50%;">
+            <div>
+                <input type="text" id="user" class="fadeIn second" formControlName="mail" name="user" placeholder="E-Mail">            
+            </div>
+            <div>
+                <small *ngIf="mail.errors?.['errorGenerico']">{{mail.errors?.['errorGenerico'].msj}}</small>
+            </div>
+        </div>
+    </div>
+    <div>
+       
+       
+        <select formControlName="obraSocial" id="obraSocial" name="obraSocial" class="custom-select d-block w-100 selectCustom" >
+            <option disabled [selected]="true" value="">Obra Social</option>
+            <option value="osde">OSDE</option>
+            <option value="ioma">IOMA</option>
+            <option value="galeno">Galeno</option>            
+        </select>    
+        <div>
+            <small *ngIf="obraSocial.errors?.['errorGenerico']">{{obraSocial.errors?.['errorGenerico'].msj}}</small>
+        </div>      
+          
+    </div>
+
+  
+
+    <div>
+        <input type="file" (change)="onFileSelected($event)">
+
+    </div>
+    <div *ngFor="let file of selectedFiles; let i = index"> 
+
+        <p>nombre del archivo: {{file[0].name}} <button (click)="removeFile(i)">Eliminar</button></p>
+        
+    </div>
+   
+    <!--<input type="text" type="password" id="password"  class="fadeIn third" [(ngModel)]="password" name="password" placeholder="Contraseña">
+    <input type="text" type="password" id="repitePass"  class="fadeIn third" [(ngModel)]="repitePass" name="repitePass" placeholder="Repetir contraseña">-->
+    <p *ngIf="selectedFiles.length != 2 ">
+        *Se requieren dos imagenes
+    </p>
+
+    <input type="submit" [disabled]="form.invalid || selectedFiles.length != 2" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 20px;" value="Crear Cuenta" (click)="CrearUsuario()" >
+
+    
+    <input type="submit" class="btn btn-primary btn-lg btn-block" value="Volver Login" style="margin-bottom: 20px;color: #56baed;background-color: white;" [routerLink]="'/login'" >
+    
+    <input type="submit" style="display:none" class="fadeIn fourth" value="Usuario 1"  [swal]="['Oops!', 'This is not implemented yet :/', 'warning']">
+  </form>

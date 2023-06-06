@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tp-clinica-2023": {
+      "hosting": {
+        "tp-clinica": [
+          "tp-clinica-2023"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tp-clinica-2023"
+  }
+}

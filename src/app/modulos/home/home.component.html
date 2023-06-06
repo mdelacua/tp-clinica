@@ -1,0 +1,85 @@
+
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+          <div style="display: grid;">
+            <span class="fs-4">Inicio Clinica</span>
+            
+            <span *ngIf="usuario">Usuario: {{usuario}}</span>
+            <span *ngIf="usuario">Tipo de usuario: {{tipoUsuario}}</span>
+  
+          </div>
+        </a>
+  
+        <ul class="nav nav-pills">
+          
+          <li class="nav-item">
+              <a *ngIf="tipoUsuario== 'admin'" (click)="BtnNavsetClicked('habilitarEspecialista','bienvenido')" [ngClass]="btnHeader.habilitarEspecialista ? 'nav-link active' :  'nav-link'" aria-current="page">Habilitar Especialista</a>
+          </li>          
+          <li class="nav-item">
+              <a *ngIf="tipoUsuario== 'admin'" (click)="BtnNavsetClicked('crearUsuarios','bienvenido')" [ngClass]="btnHeader.crearUsuarios ? 'nav-link active' :  'nav-link'" aria-current="page">Crear Usuarios</a>
+          </li> 
+          
+          <li class="nav-item" style="margin-left: 10px;">
+             
+              <button (click)="CerrarSesion()" type="button" class="btn btn-outline-danger">Cerrar Sesion</button>
+          </li>          
+       
+        </ul>
+        
+      </header>
+
+    <div *ngIf="btnHeader.habilitarEspecialista">
+
+        <app-habilitar-especialista></app-habilitar-especialista>
+    
+    </div>
+    <div *ngIf="btnHeader.crearUsuarios">
+    
+        <div class="wrapper fadeInDown">
+            <div id="formContent">
+            <!-- Tabs Titles -->
+                
+                <ul class="nav nav-pills">
+          
+                    <li class="nav-item">
+                        <a (click)="CambiarFormulario('paciente')" [ngClass]="btnForms.paciente ? 'nav-link active' :  'nav-link'" aria-current="page">Paciente</a>
+                    </li>          
+                    <li class="nav-item">
+                        <a (click)="CambiarFormulario('especialista')" [ngClass]="btnForms.especialista ? 'nav-link active' :  'nav-link'" aria-current="page">Especialista</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a (click)="CambiarFormulario('admin')" [ngClass]="btnForms.admin ? 'nav-link active' :  'nav-link'" aria-current="page">Administrador</a>
+                    </li>  
+                 
+                </ul>
+
+                <hr>
+    
+                <div id="paciente" *ngIf="btnForms.paciente">
+    
+                    <h2  [ngClass]="'active'" > Crear Cuenta Paciente</h2>       
+                    <app-crear-pacientes></app-crear-pacientes>
+                </div>
+    
+                <div id="especialista" *ngIf="btnForms.especialista">
+    
+                    <h2 [ngClass]="'active'" > Crear Cuenta Especialista</h2>       
+                    <app-crear-especialista></app-crear-especialista>
+                </div>
+    
+                <div id="admin" *ngIf="btnForms.admin">
+    
+                    <h2 [ngClass]="'active'" > Crear Cuenta Admin</h2>       
+                    <app-crear-admin></app-crear-admin>
+                </div>                    
+         
+        
+            </div>
+            
+        </div>
+      
+    </div>
+</div>
+

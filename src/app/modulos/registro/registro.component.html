@@ -1,0 +1,39 @@
+
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+        <br>
+
+        <ul style="margin-left: 30px;" class="nav nav-pills">
+  
+            <li class="nav-item">
+                <a (click)="CambiarFormulario('paciente')" [ngClass]="btnForms.paciente ? 'nav-link active' :  'nav-link'" aria-current="page">Paciente</a>
+            </li>          
+            <li class="nav-item">
+                <a (click)="CambiarFormulario('especialista')" [ngClass]="btnForms.especialista ? 'nav-link active' :  'nav-link'" aria-current="page">Especialista</a>
+            </li> 
+         
+        </ul>
+
+        <hr>
+
+        <div id="paciente" *ngIf="btnForms.paciente">
+
+            <h2  [ngClass]="'active'" > Crear Cuenta Paciente</h2>       
+            <app-crear-pacientes></app-crear-pacientes>
+        </div>
+
+        <div id="especialista" *ngIf="btnForms.especialista">
+
+            <h2 [ngClass]="'active'" > Crear Cuenta Especialista</h2>       
+            <app-crear-especialista></app-crear-especialista>
+        </div>    
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Regresar a 'Bienvenidos'</a>
+          </div>
+
+    </div>
+    
+  </div>
+  
