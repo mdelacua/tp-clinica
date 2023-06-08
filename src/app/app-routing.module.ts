@@ -9,7 +9,8 @@ const routes: Routes = [
  { path: 'registro', loadChildren: () => import('./modulos/registro/registro.module').then(m => m.RegistroModule) },
  { path: 'home' , canActivate: [PaginasLogeadoGuard], loadChildren: () => import('./modulos/home/home.module').then(m => m.HomeModule) },
  { path: '', canActivate: [LoginGuard],loadChildren: () => import('./modulos/bienvenidos/bienvenidos.module').then(m => m.BienvenidosModule) },
-  { path: 'modulos/componentes-creacion', loadChildren: () => import('./modulos/componentes-creacion/componentes-creacion.module').then(m => m.ComponentesCreacionModule) }];
+  { path: 'modulos/componentes-creacion', loadChildren: () => import('./modulos/componentes-creacion/componentes-creacion.module').then(m => m.ComponentesCreacionModule) },
+  { path: 'modulos/loading', loadChildren: () => import('./modulos/loading/loading.module').then(m => m.LoadingModule) }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

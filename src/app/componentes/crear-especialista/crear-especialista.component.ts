@@ -27,6 +27,8 @@ export class CrearEspecialistaComponent {
   btnFormulario:any = {"inciarSesion" : true,"registrarse": false }
   sesionUsuario: any;
 
+  mostrarLoading:boolean = false
+
   get nombre() { return this.form?.get('nombre'); }
   set nombre(value: any) { this.form?.get('nombre')?.patchValue(value);;  }
 
@@ -96,7 +98,9 @@ export class CrearEspecialistaComponent {
   }
 
   async CrearUsuario(){
-            
+    
+    this.mostrarLoading = true
+
     var fotos:any = []
 
     for (let i = 0; i < this.selectedFiles.length; i++) {    
@@ -117,10 +121,12 @@ export class CrearEspecialistaComponent {
       console.log(especialista)  
       this.servicioUsuario.CrearUsuario({...especialista}, 'usuario')
       this.servicioUsuario.CerrarSesionAuth()
+      this.mostrarLoading = false
       this.NotificaionInicioSesion('Usuario Creado')
       
     })
     .catch((error) => {
+      this.mostrarLoading = false
       this.ErrorUsuario('Error al crear usuario...')
       console.log('error creacion auth')
       console.log(error)

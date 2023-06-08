@@ -9,6 +9,7 @@ import { CrearEspecialistaComponent } from 'src/app/componentes/crear-especialis
 import { CrearPacientesComponent } from 'src/app/componentes/crear-pacientes/crear-pacientes.component';
 import { ComponentesCreacionComponent } from '../componentes-creacion/componentes-creacion.component';
 import { ComponentesCreacionModule } from '../componentes-creacion/componentes-creacion.module';
+import { LoadingModule } from '../loading/loading.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ComponentesCreacionModule } from '../componentes-creacion/componentes-c
     SweetAlert2Module.forRoot(),
     RegistroRoutingModule,
     ReactiveFormsModule,
-    ComponentesCreacionModule
+    ComponentesCreacionModule,
+    LoadingModule
   ]
 })
 export class RegistroModule { }

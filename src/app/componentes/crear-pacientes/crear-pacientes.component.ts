@@ -28,6 +28,8 @@ export class CrearPacientesComponent {
   btnFormulario:any = {"inciarSesion" : true,"registrarse": false }
   sesionUsuario: any;
 
+  mostrarLoading:boolean = false
+
   get nombre() { return this.form?.get('nombre'); }
   set nombre(value: any) { this.form?.get('nombre')?.patchValue(value);;  }
 
@@ -86,6 +88,7 @@ export class CrearPacientesComponent {
 
   async CrearUsuario(){
             
+    this.mostrarLoading = true
     var fotos:any = []
 
     for (let i = 0; i < this.selectedFiles.length; i++) {    
@@ -104,9 +107,11 @@ export class CrearPacientesComponent {
       console.log(userCredential)  
       
       this.servicioUsuario.CerrarSesionAuth()
+      this.mostrarLoading = false
       this.NotificaionInicioSesion('Usuario Creado')
     })
     .catch((error) => {
+      this.mostrarLoading = false
       this.ErrorUsuario('Error al crear usuario...')
       console.log('error creacion auth')
       console.log(error)
@@ -130,7 +135,7 @@ export class CrearPacientesComponent {
   NotificaionInicioSesion(mensaje:string){
     Swal.fire(
       mensaje,
-      'Por favor, inicie nuevamente sesion...Presione Ok para continuar!',
+      'Por favor, inicie sesion...Presione Ok para continuar!',
       'success'
     )
   }

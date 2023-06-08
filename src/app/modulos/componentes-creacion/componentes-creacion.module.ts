@@ -8,6 +8,7 @@ import { CrearPacientesComponent } from 'src/app/componentes/crear-pacientes/cre
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { CrearAdminComponent } from 'src/app/componentes/crear-admin/crear-admin.component';
+import { LoadingModule } from '../loading/loading.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CrearAdminComponent } from 'src/app/componentes/crear-admin/crear-admin
     FormsModule,
     SweetAlert2Module.forRoot(),
     ReactiveFormsModule,
+    LoadingModule
   ],
   exports:[
     CrearEspecialistaComponent,

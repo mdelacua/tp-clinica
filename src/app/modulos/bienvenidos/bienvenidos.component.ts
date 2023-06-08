@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./bienvenidos.component.css']
 })
 export class BienvenidosComponent {
-
+  mostrarModal = 'mostrarModal' 
+  CerrarModal(){
+    this.mostrarModal = 'modal'
+  }
+  MostrarModal(){
+    this.mostrarModal = 'mostrarModal'
+  }
 }

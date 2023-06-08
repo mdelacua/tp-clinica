@@ -1,4 +1,10 @@
-.modal {
+.divImg{
+    margin-top: 400px;
+    margin-left: 50%;
+    height: 50px;
+    width: 50px;
+}
+.ocultarModal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */

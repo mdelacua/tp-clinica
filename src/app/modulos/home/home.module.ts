@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { HabilitarEspecialistaComponent } from 'src/app/componentes/habilitar-especialista/habilitar-especialista.component';
 import { ComponentesCreacionModule } from '../componentes-creacion/componentes-creacion.module';
+import { LoadingModule } from '../loading/loading.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ComponentesCreacionModule } from '../componentes-creacion/componentes-c
   imports: [
     CommonModule,
     HomeRoutingModule,
-    ComponentesCreacionModule 
+    ComponentesCreacionModule ,
+    LoadingModule
   ]
 })
 export class HomeModule { }

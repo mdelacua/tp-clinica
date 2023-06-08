@@ -15,11 +15,13 @@ constructor(private servicioUsuario:UsuariosService){
 }
   especialistas: Especialista[] =[]
 
+  mostrarLoading:boolean = false
+
   async ngOnInit(): Promise<void> {
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.
   var queryTraerPelis = this.servicioUsuario.TraerUsuarios('tipo', '==','especialista')
-  
+  this.mostrarLoading = true
 
     const unsubscribe = onSnapshot( await queryTraerPelis, async (querySnapshot: any) => {
       
@@ -29,13 +31,18 @@ constructor(private servicioUsuario:UsuariosService){
         console.log(doc.data())
         this.especialistas.push( doc.data() )
       }); 
+      this.mostrarLoading = false
 
      
     });
 }
 
 HabilitarEspecialista(habilitar:boolean, item:Especialista){
+  this.mostrarLoading = true
   item.habilitado = habilitar
-  this.servicioUsuario.ActualizarUsuario(item.id, {...item})
+  this.servicioUsuario.ActualizarUsuario(item.id, {...item}).finally(() =>{
+    this.mostrarLoading = false
+  })
+  
 }
 }

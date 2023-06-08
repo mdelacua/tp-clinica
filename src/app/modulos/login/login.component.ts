@@ -17,7 +17,8 @@ export class LoginComponent {
   mostraCrear:any = false
   btnFormulario:any = {"inciarSesion" : true,"registrarse": false }
   sesionUsuario:any
-  
+  mostrarLoading:boolean = false
+
   constructor(private servicioUsuario:UsuariosService,  private route: ActivatedRoute,private router: Router,public readonly swalTargets: SwalPortalTargets ){
 
   }
@@ -53,6 +54,8 @@ export class LoginComponent {
     
     //this.servicioUsuario.EnviarMailVerificacion(this.user)
     //return
+    this.mostrarLoading = true
+
     var usuarioValido = await this.servicioUsuario.Autentificar(this.user,this.password) 
     
     console.log(usuarioValido)
@@ -75,6 +78,7 @@ export class LoginComponent {
       if(verificarEspecialista && verificarEspecialista.tipo == 'especialista' && verificarEspecialista.habilitado == false ){
         this.servicioUsuario.CerrarSesionAuth();  
         this.ErrorUsuario("El usuario requiere una habilitacion...")
+        this.mostrarLoading = false
         return
       }
       console.log( verificarEspecialista)
@@ -86,6 +90,8 @@ export class LoginComponent {
       this.ErrorUsuario("Usuario inválido...")
      
     }
+
+    this.mostrarLoading = false
     
    
   }
