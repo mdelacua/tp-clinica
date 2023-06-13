@@ -46,24 +46,24 @@ La clinica Online es una plataforma que le permite tanto a pacientes como especi
 # Paginas
 
 ### Pagina Bienvenidos
-![Texto alternativo](/fotos_readme/bienvenidio.png "Título alternativo")
+![Bienvenidos](src/fotos_readme/bienvenidio.png "Bienvenidos")
 
 ### Pagina Login
-![Texto alternativo](/fotos_readme/Login.png "Título alternativo")
+![Login](src/fotos_readme/Login.png "Login")
 
 ### Pagina Seleccion de usuario a crear
-![Texto alternativo](/fotos_readme/registro_seleccion.png "Título alternativo")
+![Seleccion de usuario a crear](src/fotos_readme/registro_seleccion.png "Seleccion de usuario a crear")
 
 ### Pagina Formulario de registro
-![Texto alternativo](/fotos_readme/formulario_registro.png "Título alternativo")
+![ Formulario de registro](src/fotos_readme/formulario_registro.png " Formulario de registro")
 
 
 ### Pagina Principal Administrador
-![Texto alternativo](/fotos_readme/registro_admin.png "Título alternativo")
+![Pagina Principal Administrador](src/fotos_readme/registro_admin.png "Pagina Principal Administrador")
 
 ### Pagina Principal Especialista
-![Texto alternativo](/fotos_readme/pantalla_especialista.png "Título alternativo")
+![Pagina Principal Especialista](src/fotos_readme/pantalla_especialista.png "Pagina Principal Especialista")
 
 ### Pagina Principal Paciente
-![Texto alternativo](/fotos_readme/registro_paciente.png "Título alternativo")
+![Pagina Principal Paciente](src/fotos_readme/registro_paciente.png "Pagina Principal Paciente")
 
