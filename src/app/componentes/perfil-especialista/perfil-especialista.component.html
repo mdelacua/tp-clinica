@@ -1,0 +1,74 @@
+<div id="formContent">
+    <!-- Tabs Titles -->
+    
+    <ul class="nav nav-pills">
+
+        <li class="nav-item">
+        <a (click)="CambiarFormulario('datosPrincipales'); " [ngClass]="btnForms.datosPrincipales ? 'nav-link active' :  'nav-link'" aria-current="page">datosPrincipales</a>
+        </li>          
+        <li class="nav-item">
+            <a (click)="CambiarFormulario('horariosDisponibles'); " [ngClass]="btnForms.horariosDisponibles ? 'nav-link active' :  'nav-link'" aria-current="page">horariosDisponibles</a>
+        </li>  
+
+    </ul>
+
+    <hr>
+
+    <div id="datosPrincipales" *ngIf="btnForms.datosPrincipales">
+        
+        <p>perfil-especialista works!</p>
+        <h1>Informacion del usuario</h1>
+        <h5> Nombre: {{datosUsuario.nombre}}</h5>
+        <h5>Apellido: {{datosUsuario.apellido}}</h5>
+        <h5>Edad: {{datosUsuario.edad}}</h5>
+        <h5>DNI: {{datosUsuario.dni}}</h5>
+        <h5>Mail:  {{datosUsuario.mail}}</h5>
+
+        <div *ngIf="datosUsuario">
+            <div *ngFor="let item of datosUsuario.imagen">
+
+                <img [src]="item" class="imgBtn" >
+            </div>
+        </div>
+    </div>
+
+    <div id="horariosDisponibles" *ngIf="btnForms.horariosDisponibles">
+        <div >           
+            
+            <label for="">Horarios actuales disponibles:</label>
+            <span *ngFor="let item of horariosDeEspecialista" class="example-additional-selection">
+                {{item}} ,
+            </span>
+            <br><br>
+
+            <h2>Actualizar horarios:</h2>
+
+            <mat-form-field>
+                <mat-label>Seleccione sus horarios disponibles</mat-label>
+                <mat-select [formControl]="toppings" multiple>
+
+                    <mat-select-trigger>
+                        
+                        <!--<span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
+                        (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+                        </span>-->
+                        <span *ngFor="let item of toppings.value" class="example-additional-selection">
+                            {{item}} ,
+                        </span>
+                    </mat-select-trigger>
+
+                    <mat-option *ngFor="let topping of horariosDiasDeSemana" [value]="topping">
+                        {{topping}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button class='btn btn-primary btn-lg btn-block' (click)="GuardarHorarios()">Guardar Nuevos Horarios</button>
+
+        </div>
+        
+    </div>
+
+</div>
+
+

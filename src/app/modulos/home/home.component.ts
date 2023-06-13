@@ -29,6 +29,9 @@ export class HomeComponent {
     "sacarTurno" : false,
     "turnosAdmin":false,
     "sacarTurnoAdmin":false,
+    "perfilEsp": false,
+    "perfilPaciente": false,
+    "perfilAdm": false,
     "misTurnos" : false, //TODO colocar en false al terminar
   }
   usuario:any = null

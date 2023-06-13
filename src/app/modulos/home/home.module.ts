@@ -12,7 +12,11 @@ import { TurnosPacienteComponent } from 'src/app/componentes/turnos-paciente/tur
 import { TurnosEspecialistaComponent } from 'src/app/componentes/turnos-especialista/turnos-especialista.component';
 import { NgxCaptchaModule } from 'ngx-captcha';
 import { TurnosAdministradorComponent } from 'src/app/componentes/turnos-administrador/turnos-administrador.component';
-
+import { PerfilEspecialistaComponent } from 'src/app/componentes/perfil-especialista/perfil-especialista.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
+import { PerfilAdminComponent } from 'src/app/componentes/perfil-admin/perfil-admin.component';
+import { PerfilPacienteComponent } from 'src/app/componentes/perfil-paciente/perfil-paciente.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -20,7 +24,10 @@ import { TurnosAdministradorComponent } from 'src/app/componentes/turnos-adminis
     SacarTurnoComponent,
     TurnosPacienteComponent, 
     TurnosEspecialistaComponent, 
-    TurnosAdministradorComponent
+    TurnosAdministradorComponent,
+    PerfilEspecialistaComponent,
+    PerfilAdminComponent,
+    PerfilPacienteComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +36,9 @@ import { TurnosAdministradorComponent } from 'src/app/componentes/turnos-adminis
     LoadingModule,
     ReactiveFormsModule,
     FormsModule,
-    NgxCaptchaModule
+    NgxCaptchaModule,
+    MatSlideToggleModule,
+    MatSelectModule
   ]
 })
 export class HomeModule { }

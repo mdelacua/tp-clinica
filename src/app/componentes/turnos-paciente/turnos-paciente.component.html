@@ -41,10 +41,10 @@
             <button class='btn btn-primary btn-lg btn-block'>Reseña</button>
         </td>
         <td > 
-            <button class='btn btn-primary btn-lg btn-block'>Encuesta</button>
+            <button [disabled]="item.estado != 'finalizado'" (click)="OpenModal(content2, item)" class='btn btn-primary btn-lg btn-block'>Encuesta</button>
         </td>
         <td > 
-            <button class='btn btn-primary btn-lg btn-block'>Calificar Servicio</button>
+            <button [disabled]="item.estado != 'finalizado'" (click)="OpenModal(contentCalificaion, item)" class='btn btn-primary btn-lg btn-block'>Calificar Servicio</button>
         </td>
        
        
@@ -56,7 +56,7 @@
    <!--CANCELAR CON TEXTO OBLIGATORIO MODAL-->
   
   
-  <!-- Modal -->
+  <!-- Modal  -->
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Cancelar Turno</h4>
@@ -71,6 +71,53 @@
     </div>
     <div class="modal-footer">
       <button [disabled]="!motivoCancelar" type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar Turno</button>
+    </div>
+  </ng-template>
+
+  <hr />
+
+  <!--Encuesta CON TEXTO OBLIGATORIO MODAL-->
+  
+  
+  <!-- Modal  -->
+  <ng-template #content2 let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Encuesta Turno</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">*Pregunta1</span>
+      </div>
+      <input type="text"  class="form-control" placeholder="Pregunta1" aria-label="Username" aria-describedby="basic-addon1">
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" >Enviar Encuesta</button>
+    </div>
+  </ng-template>
+
+  <hr />
+
+  
+  <!--Calificaion servicio CON TEXTO OBLIGATORIO MODAL-->
+  
+  
+  <!-- Modal  -->
+  <ng-template #contentCalificaion let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Calificacion servicio Turno</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">*Comentario sobre el especialista</span>
+      </div>
+      <input type="text"  class="form-control" placeholder="Comentario" aria-label="Username" aria-describedby="basic-addon1">
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" >Enviar Calificaion</button>
     </div>
   </ng-template>
 

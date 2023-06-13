@@ -1,0 +1,37 @@
+<div id="formContent">
+    <!-- Tabs Titles -->
+    
+    <ul class="nav nav-pills">
+
+        <li class="nav-item">
+        <a (click)="CambiarFormulario('datosPrincipales'); " [ngClass]="btnForms.datosPrincipales ? 'nav-link active' :  'nav-link'" aria-current="page">datosPrincipales</a>
+        </li>          
+        
+
+    </ul>
+
+    <hr>
+
+    <div id="datosPrincipales" *ngIf="btnForms.datosPrincipales">
+        
+        <p>perfil-especialista works!</p>
+        <h1>Informacion del usuario</h1>
+        <h5> Nombre: {{datosUsuario.nombre}}</h5>
+        <h5>Apellido: {{datosUsuario.apellido}}</h5>
+        <h5>Edad: {{datosUsuario.edad}}</h5>
+        <h5>DNI: {{datosUsuario.dni}}</h5>
+        <h5>Mail:  {{datosUsuario.mail}}</h5>
+
+        <div *ngIf="datosUsuario">
+            <div *ngFor="let item of datosUsuario.imagen">
+
+                <img [src]="item" class="imgBtn" >
+            </div>
+        </div>
+    </div>
+
+   
+
+</div>
+
+

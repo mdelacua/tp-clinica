@@ -28,6 +28,8 @@ export class SacarTurnoComponent {
 
   nombreUsuario!:string
 
+  fechasDisponibles!:Array<string> //FECHAS PARA MOSTRAR EN SELECT
+
   constructor(private servicioUsuario:UsuariosService ,private formBuilder: FormBuilder, private turnoService: TurnosService){
   }
 
@@ -54,6 +56,8 @@ export class SacarTurnoComponent {
     this.iniciarValidacion()
     this.definirFechasMinMax()
     this.validar()
+
+    this.traerFechas()//TODO BORRAR
   }
 
   /*FECHA */
@@ -117,6 +121,10 @@ export class SacarTurnoComponent {
     console.log(value)
     this.horaSeleccionado = value
 	}
+	onSelectedDiaSelect(value:string): void {
+    console.log(value)
+    this.diaSeleccionado = value
+	}
 	onSelectedDia(value:any): void {
     console.log(value)
     console.log(this.loginForm.get('requestdate')?.value)
@@ -130,7 +138,16 @@ export class SacarTurnoComponent {
     var e = document.getElementById("selectEspecialista") as HTMLSelectElement; // trae el ID de la opcion
     this.especialistaSeleccionado = e?.options[e.selectedIndex].id;
     this.apellidoEspecialistaSeleccionado = value;
+    this.BuscarHoraPorEspecialista(this.especialistaSeleccionado)
 	}
+
+  BuscarHoraPorEspecialista(mail:string){
+    this.totalEspecialistas.forEach((element: Especialista) => {
+      if(element.mail == mail && element.horariosDeAtencion){
+        this.horariosDiasDeSemana = element.horariosDeAtencion
+      }
+    });
+  }
 
   ReiniciarDatos(){
     var selectEsp = ( document.getElementById("selectEspecialista") ) as HTMLSelectElement
@@ -185,5 +202,36 @@ export class SacarTurnoComponent {
         this.especialistasPorEspecialidad.push(element)
       }
     });
+  }
+
+
+
+  traerFechas(){
+    // Obtén la fecha actual
+      const fechaActual = new Date();
+
+      // Crea un array para almacenar las fechas
+      const fechas: string[] = [];
+
+      // Itera desde el día actual hasta quince días después
+      for (let i = 0; i < 16; i++) {
+        // Calcula la fecha actual más el número de días de la iteración
+        const fecha = new Date(fechaActual.getTime() + i * 24 * 60 * 60 * 1000);
+
+        // Obtiene los componentes de la fecha (día, mes, año)
+        const dia = fecha.getDate().toString().padStart(2, '0');
+        const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Enero es 0
+        const anio = fecha.getFullYear();
+
+        // Crea la cadena de fecha en el formato "dd-mm-yyyy"
+        const fechaStr = `${dia}-${mes}-${anio}`;
+
+        // Agrega la fecha al array
+        fechas.push(fechaStr);
+      }
+
+      this.fechasDisponibles = fechas
+      // Imprime el array de fechas
+      console.log('traer fechas test',fechas);
   }
 }

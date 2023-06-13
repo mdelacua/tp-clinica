@@ -24,7 +24,9 @@
         </a>
   
         <ul class="nav nav-pills" >
-          
+            <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
+                <a  (click)="BtnNavsetClicked('perfilAdm','bienvenido')" [ngClass]="btnHeader.perfilAdm ? 'nav-link active' :  'nav-link'" aria-current="page">Perfil</a>
+            </li> 
           <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
               <a  (click)="BtnNavsetClicked('habilitarEspecialista','bienvenido')" [ngClass]="btnHeader.habilitarEspecialista ? 'nav-link active' :  'nav-link'" aria-current="page">Habilitar Especialista</a>
           </li>          
@@ -34,14 +36,20 @@
           <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
               <a  (click)="BtnNavsetClicked('turnosAdmin','bienvenido')" [ngClass]="btnHeader.turnosAdmin ? 'nav-link active' :  'nav-link'" aria-current="page">Turnos</a>
           </li> 
-          <li *ngIf="infoUsuario && infoUsuario.tipo== 'paciente'" class="nav-item">
-              <a  (click)="BtnNavsetClicked('sacarTurno','bienvenido')" [ngClass]="btnHeader.sacarTurno ? 'nav-link active' :  'nav-link'" aria-current="page">Solicitar Turno</a>
-          </li> 
           <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
               <a  (click)="BtnNavsetClicked('sacarTurnoAdmin','bienvenido')" [ngClass]="btnHeader.sacarTurnoAdmin ? 'nav-link active' :  'nav-link'" aria-current="page">Solicitar Turno</a>
           </li> 
+            <li *ngIf="infoUsuario && infoUsuario.tipo== 'paciente'" class="nav-item">
+                <a  (click)="BtnNavsetClicked('perfilPaciente','bienvenido')" [ngClass]="btnHeader.perfilPaciente ? 'nav-link active' :  'nav-link'" aria-current="page">Perfil</a>
+            </li> 
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'paciente'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('sacarTurno','bienvenido')" [ngClass]="btnHeader.sacarTurno ? 'nav-link active' :  'nav-link'" aria-current="page">Solicitar Turno</a>
+          </li> 
           <li *ngIf="infoUsuario && infoUsuario.tipo== 'paciente'" class="nav-item">
               <a  (click)="BtnNavsetClicked('misTurnos','bienvenido')" [ngClass]="btnHeader.misTurnos ? 'nav-link active' :  'nav-link'" aria-current="page">Mis Turnos</a>
+          </li> 
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'especialista'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('perfilEsp','bienvenido')" [ngClass]="btnHeader.perfilEsp ? 'nav-link active' :  'nav-link'" aria-current="page">Perfil</a>
           </li> 
           <li *ngIf="infoUsuario && infoUsuario.tipo== 'especialista'" class="nav-item">
               <a  (click)="BtnNavsetClicked('misTurnos','bienvenido')" [ngClass]="btnHeader.misTurnos ? 'nav-link active' :  'nav-link'" aria-current="page">Mis Turnos</a>
@@ -59,6 +67,10 @@
         <!-- USUARIO ADMIN-->
         <div *ngIf="infoUsuario && infoUsuario.tipo == 'admin'">
             
+                <div *ngIf="btnHeader.perfilAdm">
+
+                    <app-perfil-admin></app-perfil-admin>
+                </div>
                 <div *ngIf="btnHeader.habilitarEspecialista">
                 
                     <app-habilitar-especialista></app-habilitar-especialista>
@@ -161,6 +173,10 @@
 
                 <app-turnos-paciente></app-turnos-paciente>
             </div>
+            <div *ngIf="btnHeader.perfilPaciente">
+
+                <app-perfil-paciente></app-perfil-paciente>
+            </div>
         </div>
         <!--FIN USUARIO PACIENTE-->
         
@@ -170,6 +186,10 @@
             <div *ngIf="btnHeader.misTurnos">
 
                 <app-turnos-especialista></app-turnos-especialista>
+            </div>
+            <div *ngIf="btnHeader.perfilEsp">
+
+                <app-perfil-especialista></app-perfil-especialista>
             </div>
         </div>
         <!--FIN USUARIO especialista-->

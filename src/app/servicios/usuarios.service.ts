@@ -6,6 +6,7 @@ import { signOut, getAuth,sendEmailVerification , createUserWithEmailAndPassword
 import { doc, onSnapshot, setDoc,getFirestore, addDoc, collection, query, where, updateDoc, orderBy, limit, getDocs, arrayUnion, arrayRemove   } from "firebase/firestore";
 
 import { environment } from 'src/environments/environment.development';
+import { Usuario } from '../clases/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class UsuariosService {
   emailUsuario!: any;
   tipo!:string
   auth1: any
+  datosUsuarioConectado!:Usuario
 
   constructor(private router: Router) { 
     const app = initializeApp(environment.firebase);
@@ -125,6 +127,7 @@ export class UsuariosService {
         verificarEspecialista.tipo = doc.data()['tipo'];
         this.tipo = doc.data()['tipo'];
         verificarEspecialista.habilitado = doc.data()['habilitado'];
+        this.datosUsuarioConectado = doc.data()
       });     
       
       if(verificarEspecialista && verificarEspecialista.tipo == 'especialista' && verificarEspecialista.habilitado == false ){

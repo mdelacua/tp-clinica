@@ -16,7 +16,7 @@
     </select> 
 
     <form [formGroup]="loginForm">
-        <div *ngIf="especialistaSeleccionado ">
+       <!-- <div *ngIf="especialistaSeleccionado ">
             <label for="">Fecha:</label>
             <input
               id="requestdate" 
@@ -27,7 +27,16 @@
               [min]='fechaActual' [max]='fechaMax'
               style="    margin-bottom: 20px;" />
         </div>
-        
+        -->
+
+         <div *ngIf="especialistaSeleccionado">
+            <label for="">Fechas disponibles:</label>
+            <select #dias  (change)="onSelectedDiaSelect(dias.value)"class="custom-select d-block w-100 selectCustom"  >
+                <option disabled [selected]="true" value="">Seleccione un horario...</option> 
+                <option *ngFor='let item of fechasDisponibles' [value]="item">{{item}}</option>
+            </select>  
+        </div>
+
         <div *ngIf="diaSeleccionado && especialistaSeleccionado">
             <label for="">Horario:</label>
             <select #hora (change)="onSelectedHora(hora.value)" class="custom-select d-block w-100 selectCustom"  >
