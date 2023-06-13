@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { getDocs, onSnapshot } from '@angular/fire/firestore';
+import { onSnapshot } from '@firebase/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
+import { Usuario } from 'src/app/clases/usuario';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 import Swal from 'sweetalert2';
 
@@ -18,13 +19,14 @@ export class LoginComponent {
   btnFormulario:any = {"inciarSesion" : true,"registrarse": false }
   sesionUsuario:any
   mostrarLoading:boolean = false
+  usuariosRapidos:Usuario[] = []
 
   constructor(private servicioUsuario:UsuariosService,  private route: ActivatedRoute,private router: Router,public readonly swalTargets: SwalPortalTargets ){
 
   }
 
   ngOnInit() {
-   
+   this.TraerUsuariosRapidos()
   }
 
   ngOnDestroy(){
@@ -94,6 +96,25 @@ export class LoginComponent {
     this.mostrarLoading = false
     
    
+  }
+
+  async TraerUsuariosRapidos(){
+    var queryTraerPelis = this.servicioUsuario.TraerUsuarios('mail', 'in',['mobaxoj782@onlcool.com', 'xawiro8204@pyadu.com', 'satan97450@peogi.com', 'royol22540@rockdian.com', 'raxobol454@soremap.com'])
+    this.mostrarLoading = true
+
+    const unsubscribe = onSnapshot( await queryTraerPelis, async (querySnapshot: any) => {
+      
+      this.usuariosRapidos = []
+      querySnapshot.forEach(async (doc: any) => {
+      
+        console.log(doc.data())
+        this.usuariosRapidos.push( doc.data() )
+      }); 
+      //console.log(this.usuariosRapidos)
+      this.mostrarLoading = false
+
+     
+    });
   }
   
   ErrorUsuario(msj:any){

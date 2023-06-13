@@ -1,10 +1,40 @@
 
 
 <div class="container">
+
+  
   <div id="formContent">
     <!-- Tabs Titles -->
-        <br>
 
+    <div *ngIf="!btnForms.paciente && !btnForms.especialista">
+        <br><br>
+
+        <h2  [ngClass]="'active'" > Seleccionar tipo de cuenta a crear</h2>   
+        <br><br><br>
+        <div style="display: flex;">
+    
+    
+            <div style="width:100%">
+                <button>
+    
+                    <img src="..\assets\familia.jpg" (click)="CambiarFormulario('paciente')"  class='imgSeleccion'alt="">
+                </button>
+            </div>
+            <div style="width:100%">
+                <button>
+    
+                    <img src="..\assets\doctora.jpg" (click)="CambiarFormulario('especialista')" class='imgSeleccion'alt="">
+                </button>
+    
+            </div>
+        </div>
+        <br><br>
+    </div>
+
+    <!-- FORMULARIO -->
+    
+        <br>
+        <!--
         <ul style="margin-left: 30px;" class="nav nav-pills">
   
             <li class="nav-item">
@@ -15,25 +45,56 @@
             </li> 
          
         </ul>
-
         <hr>
+        -->
 
         <div id="paciente" *ngIf="btnForms.paciente">
 
-            <h2  [ngClass]="'active'" > Crear Cuenta Paciente</h2>       
-            <app-crear-pacientes></app-crear-pacientes>
+            <h2  [ngClass]="'active'" > Crear Cuenta Paciente</h2> 
+
+            <app-crear-pacientes [recibeCaptcha]="validoCaptcha" ></app-crear-pacientes>
+
+            <form [formGroup]="aFormGroup">
+                <ngx-recaptcha2 #captchaElem
+                  [siteKey]="'6LfCSY8mAAAAAIt6Wy9ocCB_ROFENxlPvNvSBtUo'"
+                  (success)="handleSuccess($event)"
+                  (expire)="handleExpire()"
+                  [useGlobalDomain]="false"
+                  formControlName="recaptcha">
+                </ngx-recaptcha2>
+            </form>
+            <div id="formFooter">
+                <a class="underlineHover" (click)="btnForms.paciente = false; btnForms.especialista = false; validoCaptcha=false">Volver a seleccionar usuario </a>
+            </div>
         </div>
 
         <div id="especialista" *ngIf="btnForms.especialista">
 
             <h2 [ngClass]="'active'" > Crear Cuenta Especialista</h2>       
-            <app-crear-especialista></app-crear-especialista>
+            <app-crear-especialista [recibeCaptcha]="validoCaptcha"></app-crear-especialista>
+            
+            <form [formGroup]="aFormGroup">
+                <ngx-recaptcha2 #captchaElem
+                  [siteKey]="'6LfCSY8mAAAAAIt6Wy9ocCB_ROFENxlPvNvSBtUo'"
+                  (success)="handleSuccess($event)"
+                  (expire)="handleExpire()"
+                  [useGlobalDomain]="false"
+                  formControlName="recaptcha">
+                </ngx-recaptcha2>
+            </form>
+            
+            <div id="formFooter">
+                <a class="underlineHover" (click)="btnForms.paciente = false; btnForms.especialista = false; validoCaptcha=false">Volver a seleccionar usuario </a>
+            </div>
         </div>    
         <div id="formFooter">
             <a class="underlineHover" href="#">Regresar a 'Bienvenidos'</a>
-          </div>
+        </div>
+        
 
     </div>
+
+   
     
   </div>
   

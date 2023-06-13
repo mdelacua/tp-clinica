@@ -100,7 +100,8 @@ export function ValidarCaracteresTexto(min:number, max:number, soloLetras:boolea
         }       
 
         if (soloLetras) {
-            const patron = /^[a-zA-Z]+$/;
+            //const patron = /^[a-zA-Z]+$/;
+            const patron = /^[a-zA-Z\s]+$/;
             if (!patron.test(campoAValidar.value)) {
                 errors.errorGenerico = { msj: '*El campo solo acepta letras'}
                 campoAValidar?.setErrors(errors);

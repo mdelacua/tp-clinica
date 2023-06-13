@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, SimpleChanges } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import { Especialista } from 'src/app/clases/especialista';
@@ -15,6 +15,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./crear-pacientes.component.css']
 })
 export class CrearPacientesComponent {
+
+  @Input() recibeCaptcha: boolean =false  //CAPTCHA
+  
 
   form!: FormGroup;
   formNuevaEsp!: FormGroup;
@@ -51,7 +54,7 @@ export class CrearPacientesComponent {
   get obraSocial() { return this.form?.get('obraSocial'); }
   set obraSocial(value: any) { this.form?.get('obraSocial')?.patchValue(value);;  }
 
-  constructor(private archivoService: ArchivoService,private servicioUsuario:UsuariosService,private router: Router,public readonly swalTargets: SwalPortalTargets){
+  constructor(private archivoService: ArchivoService,private servicioUsuario:UsuariosService,private router: Router,public readonly swalTargets: SwalPortalTargets, private formBuilder: FormBuilder){
 
   }
 
@@ -82,6 +85,7 @@ export class CrearPacientesComponent {
 
   ngOnDestroy(){
     console.log('ngOnDestroy')
+    this.recibeCaptcha = false
     //this.sesionUsuario.Unsubscribe()
   }
   
@@ -103,7 +107,7 @@ export class CrearPacientesComponent {
     usuarioCreado.then(async (userCredential) => {
       
       this.servicioUsuario.EnviarMailVerificacion()
-      this.servicioUsuario.CrearUsuario({...paciente}, 'usuario')
+      await this.servicioUsuario.CrearUsuario({...paciente}, 'usuario')
       console.log(userCredential)  
       
       this.servicioUsuario.CerrarSesionAuth()
@@ -169,5 +173,6 @@ export class CrearPacientesComponent {
     console.log(fotos)
   }
 
-
+  
+  
 }

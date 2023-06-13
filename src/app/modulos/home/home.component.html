@@ -1,4 +1,7 @@
 
+
+ 
+
 <div class="container">
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
@@ -6,19 +9,42 @@
           <div style="display: grid;">
             <span class="fs-4">Inicio Clinica</span>
             
-            <span *ngIf="usuario">Usuario: {{usuario}}</span>
-            <span *ngIf="usuario">Tipo de usuario: {{tipoUsuario}}</span>
-  
+            <div style="display: flex; ">
+                <div *ngIf="infoUsuario">
+                    <img [src]="infoUsuario.imagen[0]" class="imgBtn" >
+                </div>
+                <div>
+                    <span *ngIf="infoUsuario">Tipo de usuario: {{infoUsuario.tipo}}</span>
+                    <br>
+                    <span *ngIf="infoUsuario">Usuario: {{infoUsuario.mail}}</span>                    
+                </div>
+            </div>
+            
           </div>
         </a>
   
-        <ul class="nav nav-pills">
+        <ul class="nav nav-pills" >
           
-          <li class="nav-item">
-              <a *ngIf="tipoUsuario== 'admin'" (click)="BtnNavsetClicked('habilitarEspecialista','bienvenido')" [ngClass]="btnHeader.habilitarEspecialista ? 'nav-link active' :  'nav-link'" aria-current="page">Habilitar Especialista</a>
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('habilitarEspecialista','bienvenido')" [ngClass]="btnHeader.habilitarEspecialista ? 'nav-link active' :  'nav-link'" aria-current="page">Habilitar Especialista</a>
           </li>          
-          <li class="nav-item">
-              <a *ngIf="tipoUsuario== 'admin'" (click)="BtnNavsetClicked('crearUsuarios','bienvenido')" [ngClass]="btnHeader.crearUsuarios ? 'nav-link active' :  'nav-link'" aria-current="page">Crear Usuarios</a>
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('crearUsuarios','bienvenido')" [ngClass]="btnHeader.crearUsuarios ? 'nav-link active' :  'nav-link'" aria-current="page">Crear Usuarios</a>
+          </li> 
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('turnosAdmin','bienvenido')" [ngClass]="btnHeader.turnosAdmin ? 'nav-link active' :  'nav-link'" aria-current="page">Turnos</a>
+          </li> 
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'paciente'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('sacarTurno','bienvenido')" [ngClass]="btnHeader.sacarTurno ? 'nav-link active' :  'nav-link'" aria-current="page">Solicitar Turno</a>
+          </li> 
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('sacarTurnoAdmin','bienvenido')" [ngClass]="btnHeader.sacarTurnoAdmin ? 'nav-link active' :  'nav-link'" aria-current="page">Solicitar Turno</a>
+          </li> 
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'paciente'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('misTurnos','bienvenido')" [ngClass]="btnHeader.misTurnos ? 'nav-link active' :  'nav-link'" aria-current="page">Mis Turnos</a>
+          </li> 
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'especialista'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('misTurnos','bienvenido')" [ngClass]="btnHeader.misTurnos ? 'nav-link active' :  'nav-link'" aria-current="page">Mis Turnos</a>
           </li> 
           
           <li class="nav-item" style="margin-left: 10px;">
@@ -30,56 +56,122 @@
         
       </header>
 
-    <div *ngIf="btnHeader.habilitarEspecialista">
-
-        <app-habilitar-especialista></app-habilitar-especialista>
-    
-    </div>
-    <div *ngIf="btnHeader.crearUsuarios">
-    
-        <div class="wrapper fadeInDown">
-            <div id="formContent">
-            <!-- Tabs Titles -->
-                
-                <ul class="nav nav-pills">
-          
-                    <li class="nav-item">
-                        <a (click)="CambiarFormulario('paciente')" [ngClass]="btnForms.paciente ? 'nav-link active' :  'nav-link'" aria-current="page">Paciente</a>
-                    </li>          
-                    <li class="nav-item">
-                        <a (click)="CambiarFormulario('especialista')" [ngClass]="btnForms.especialista ? 'nav-link active' :  'nav-link'" aria-current="page">Especialista</a>
-                    </li> 
-                    <li class="nav-item">
-                        <a (click)="CambiarFormulario('admin')" [ngClass]="btnForms.admin ? 'nav-link active' :  'nav-link'" aria-current="page">Administrador</a>
-                    </li>  
-                 
-                </ul>
-
-                <hr>
-    
-                <div id="paciente" *ngIf="btnForms.paciente">
-    
-                    <h2  [ngClass]="'active'" > Crear Cuenta Paciente</h2>       
-                    <app-crear-pacientes></app-crear-pacientes>
-                </div>
-    
-                <div id="especialista" *ngIf="btnForms.especialista">
-    
-                    <h2 [ngClass]="'active'" > Crear Cuenta Especialista</h2>       
-                    <app-crear-especialista></app-crear-especialista>
-                </div>
-    
-                <div id="admin" *ngIf="btnForms.admin">
-    
-                    <h2 [ngClass]="'active'" > Crear Cuenta Admin</h2>       
-                    <app-crear-admin></app-crear-admin>
-                </div>                    
-         
-        
-            </div>
+        <!-- USUARIO ADMIN-->
+        <div *ngIf="infoUsuario && infoUsuario.tipo == 'admin'">
             
+                <div *ngIf="btnHeader.habilitarEspecialista">
+                
+                    <app-habilitar-especialista></app-habilitar-especialista>
+                
+                </div>
+                <div *ngIf="btnHeader.turnosAdmin">
+                
+                    <app-turnos-administrador></app-turnos-administrador>
+                
+                </div>
+                <div *ngIf="btnHeader.sacarTurnoAdmin">
+                
+                    <app-sacar-turno [mostrarMail]="'display:block'"></app-sacar-turno>
+                
+                </div>
+                <div *ngIf="btnHeader.crearUsuarios">
+                    
+                    <div class="wrapper fadeInDown">
+                        <div id="formContent">
+                            <!-- Tabs Titles -->
+                            
+                            <ul class="nav nav-pills">
+                    
+                                <li class="nav-item">
+                                <a (click)="CambiarFormulario('paciente'); validoCaptcha=false" [ngClass]="btnForms.paciente ? 'nav-link active' :  'nav-link'" aria-current="page">Paciente</a>
+                                </li>          
+                            <li class="nav-item">
+                                <a (click)="CambiarFormulario('especialista'); validoCaptcha=false" [ngClass]="btnForms.especialista ? 'nav-link active' :  'nav-link'" aria-current="page">Especialista</a>
+                            </li> 
+                            <li class="nav-item">
+                                <a (click)="CambiarFormulario('admin'); validoCaptcha=false" [ngClass]="btnForms.admin ? 'nav-link active' :  'nav-link'" aria-current="page">Administrador</a>
+                            </li>  
+                        
+                        </ul>
+        
+                        <hr>
+            
+                        <div id="paciente" *ngIf="btnForms.paciente">
+            
+                            <h2  [ngClass]="'active'" > Crear Cuenta Paciente</h2>       
+                            <app-crear-pacientes [recibeCaptcha]="validoCaptcha"></app-crear-pacientes>
+                            <form [formGroup]="aFormGroup">
+                                <ngx-recaptcha2 #captchaElem
+                                  [siteKey]="'6LfCSY8mAAAAAIt6Wy9ocCB_ROFENxlPvNvSBtUo'"
+                                  (success)="handleSuccess($event)"
+                                  (expire)="handleExpire()"
+                                  [useGlobalDomain]="false"
+                                  formControlName="recaptcha">
+                                </ngx-recaptcha2>
+                            </form>
+                        </div>
+            
+                        <div id="especialista" *ngIf="btnForms.especialista">
+            
+                            <h2 [ngClass]="'active'" > Crear Cuenta Especialista</h2>       
+                            <app-crear-especialista [recibeCaptcha]="validoCaptcha"></app-crear-especialista>
+                            <form [formGroup]="aFormGroup">
+                                <ngx-recaptcha2 #captchaElem
+                                  [siteKey]="'6LfCSY8mAAAAAIt6Wy9ocCB_ROFENxlPvNvSBtUo'"
+                                  (success)="handleSuccess($event)"
+                                  (expire)="handleExpire()"
+                                  [useGlobalDomain]="false"
+                                  formControlName="recaptcha">
+                                </ngx-recaptcha2>
+                            </form>
+                        </div>
+            
+                        <div id="admin" *ngIf="btnForms.admin">
+            
+                            <h2 [ngClass]="'active'" > Crear Cuenta Admin</h2>       
+                            <app-crear-admin [recibeCaptcha]="validoCaptcha"></app-crear-admin>
+                            <form [formGroup]="aFormGroup">
+                                <ngx-recaptcha2 #captchaElem
+                                  [siteKey]="'6LfCSY8mAAAAAIt6Wy9ocCB_ROFENxlPvNvSBtUo'"
+                                  (success)="handleSuccess($event)"
+                                  (expire)="handleExpire()"
+                                  [useGlobalDomain]="false"
+                                  formControlName="recaptcha">
+                                </ngx-recaptcha2>
+                            </form>
+                        </div>                    
+                
+                
+                    </div>
+                    
+                </div>
+                                
+                
+            </div>
         </div>
-      
-    </div>
+        <!--FIN USUARIO ADMIN-->
+
+        <!-- USUARIO PACIENTE-->
+        <div *ngIf="infoUsuario && infoUsuario.tipo == 'paciente'">
+            <div *ngIf="btnHeader.sacarTurno">
+
+                <app-sacar-turno></app-sacar-turno>
+            </div>
+            <div *ngIf="btnHeader.misTurnos">
+
+                <app-turnos-paciente></app-turnos-paciente>
+            </div>
+        </div>
+        <!--FIN USUARIO PACIENTE-->
+        
+        <!-- USUARIO especialista-->
+        <div *ngIf="infoUsuario && infoUsuario.tipo == 'especialista'">
+            
+            <div *ngIf="btnHeader.misTurnos">
+
+                <app-turnos-especialista></app-turnos-especialista>
+            </div>
+        </div>
+        <!--FIN USUARIO especialista-->
 </div>
 

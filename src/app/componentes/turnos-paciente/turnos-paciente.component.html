@@ -1,0 +1,77 @@
+<app-loading-comp [inputMostrarModal]="mostrarLoading"></app-loading-comp>
+
+<h1>Habilitar Especialistas: </h1>
+<div>
+
+    <h5>Filtro por Especialista / Apellido Especialista:</h5>
+    <input type="text" class="form-control" placeholder="Filtro" [(ngModel)]="filtroEsp">
+    <br>
+    <button (click)="FiltrarEspecialista()" class='btn btn-primary btn-lg btn-block'>Buscar</button>
+    <br>
+</div>
+<table class="table" *ngIf="misTurnosAux">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Apellido Especialista</th>
+        <th scope="col">Especialidad</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Dia</th>
+        <th scope="col">Hora</th>
+        <th scope="col">Motivo de Cancelacion</th>
+        <th scope="col">Cancelar Turno</th>
+        <th scope="col">Reseña</th>
+        <th scope="col">Encuesta</th>
+        <th scope="col">Calificar Servicio</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of misTurnosAux; let i=index">
+      <tr>
+        <th scope="row">{{i +1}}</th>
+        <td> {{item.apellidoEspecialista}}</td>
+        <td>{{item.especialidad}}</td>
+        <td>{{item.estado}}</td>        
+        <td style="text-wrap: nowrap;">{{item.diaTurno}}</td>
+        <td>{{item.horaTurno}}</td>
+        <td>{{item.motivoCancelamiento}}</td>
+        <td > 
+          <button [disabled]="item.estado != 'pendiente'" class='btn btn-primary btn-lg btn-block'(click)="OpenModal(content, item)">Cancelar Turno</button>   
+        </td>
+        <td > 
+            <button class='btn btn-primary btn-lg btn-block'>Reseña</button>
+        </td>
+        <td > 
+            <button class='btn btn-primary btn-lg btn-block'>Encuesta</button>
+        </td>
+        <td > 
+            <button class='btn btn-primary btn-lg btn-block'>Calificar Servicio</button>
+        </td>
+       
+       
+            
+    </tr>
+     
+    </tbody>
+  </table>
+   <!--CANCELAR CON TEXTO OBLIGATORIO MODAL-->
+  
+  
+  <!-- Modal -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Cancelar Turno</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">*Motivo de cancelacion</span>
+      </div>
+      <input type="text" [(ngModel)]="motivoCancelar" class="form-control" placeholder="Motivo" aria-label="Username" aria-describedby="basic-addon1">
+
+    </div>
+    <div class="modal-footer">
+      <button [disabled]="!motivoCancelar" type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar Turno</button>
+    </div>
+  </ng-template>
+
+  <hr />

@@ -1,0 +1,50 @@
+<app-loading-comp [inputMostrarModal]="mostrarLoading"></app-loading-comp>
+<p>sacar-turno works!</p>
+
+<div *ngIf="especialidades">
+    <label for="">Especilidad:</label>
+    <select #teams (change)="onSelected(teams.value)" class="custom-select d-block w-100 selectCustom" >
+        <option disabled [selected]="true" value="">Seleccione una especialidad...</option>        
+        <option *ngFor="let item of especialidades" [value]="item">{{item}}</option> 
+    </select>    
+</div>
+<div *ngIf="especialidadSeleccionada">
+    <label for="">Especialista:</label>
+    <select #esp (change)="onSelectedEspecialista(esp.value, esp)"  id="selectEspecialista" class="custom-select d-block w-100 selectCustom" >
+        <option disabled [selected]="true" value="">Seleccione un Especialista...</option> 
+        <option *ngFor='let item of especialistasPorEspecialidad' [value]="item.apellido" [id]="item.mail">{{item.apellido}}</option>
+    </select> 
+
+    <form [formGroup]="loginForm">
+        <div *ngIf="especialistaSeleccionado ">
+            <label for="">Fecha:</label>
+            <input
+              id="requestdate" 
+              type="date" 
+              class="form-control" 
+              formControlName="requestdate"
+              (change)="onSelectedDia($event)"
+              [min]='fechaActual' [max]='fechaMax'
+              style="    margin-bottom: 20px;" />
+        </div>
+        
+        <div *ngIf="diaSeleccionado && especialistaSeleccionado">
+            <label for="">Horario:</label>
+            <select #hora (change)="onSelectedHora(hora.value)" class="custom-select d-block w-100 selectCustom"  >
+                <option disabled [selected]="true" value="">Seleccione un horario...</option> 
+                <option *ngFor='let item of horariosDiasDeSemana' [value]="item">{{item}}</option>
+            </select>  
+        </div>
+    
+    </form>
+    <form [formGroup]="form" id="iniciarSesionForm" [style]="mostrarMail">
+        <div>
+            <input type="text" id="user" class="fadeIn second" formControlName="mail" name="user" placeholder="E-Mail">            
+        </div>
+        <div>
+            <small *ngIf="mail.errors?.['errorGenerico']">{{mail.errors?.['errorGenerico'].msj}}</small>
+        </div>
+    </form>
+</div>
+
+<button [disabled]="!especialistaSeleccionado || !diaSeleccionado || !horaSeleccionado || form.invalid" (click)="CrearTurno()" type="button" class="btn btn-outline-danger">Crear Turno</button>

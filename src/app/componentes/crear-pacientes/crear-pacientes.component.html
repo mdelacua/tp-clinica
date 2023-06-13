@@ -1,5 +1,9 @@
 <app-loading-comp [inputMostrarModal]="mostrarLoading"></app-loading-comp>
 
+
+
+
+
 <form [formGroup]="form" id="iniciarSesionForm">
     <div style="display: flex;">
 
@@ -96,7 +100,7 @@
         *Se requieren dos imagenes
     </p>
 
-    <input type="submit" [disabled]="form.invalid || selectedFiles.length != 2" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 20px;" value="Crear Cuenta" (click)="CrearUsuario()" >
+    <input type="submit" [disabled]="form.invalid || selectedFiles.length != 2 || !recibeCaptcha" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 20px;" value="Crear Cuenta" (click)="CrearUsuario()" >
 
     
     <input type="submit" class="btn btn-primary btn-lg btn-block" value="Volver Login" style="margin-bottom: 20px;color: #56baed;background-color: white;" [routerLink]="'/login'" >

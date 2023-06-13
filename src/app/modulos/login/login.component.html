@@ -3,6 +3,16 @@
 
 <div class="wrapper fadeInDown">
     <div id="formContent">
+
+      <br><br>
+      <div class="contenedorDeUsuarios">
+        <div style="width: 100%;" *ngFor="let item of usuariosRapidos">         
+          <button  (click)="user = item.mail; password = '123123'"  class="btn btn-outline-primary" >
+            <img [src]="item.imagen[0]" class="imgBtn" >
+            {{item.tipo}}
+          </button>
+        </div>
+      </div>
       <!-- Tabs Titles -->
       <h2  [ngClass]="btnFormulario.inciarSesion ? 'active' :  'inactive underlineHover'" > Iniciar Sesion </h2>    
   
@@ -16,9 +26,11 @@
 
             <input type="submit" class="fadeIn fourth" value="Regristrarse" style="margin-bottom: 20px;color: #56baed;background-color: white;" [routerLink]="'/registro'" >
 
-            <input type="submit" style="margin-bottom: 20px;    width: 56%;" (click)="user = 'satan97450@peogi.com'; password = '123123'"  class="fadeIn fourth" value="Especialista"  >
+            
+            <!--
             <input type="submit" style="margin-bottom: 20px;    width: 56%;" (click)="user = 'xawiro8204@pyadu.com'; password = '123123'"  class="fadeIn fourth" value="Paciente"  >
             <input type="submit" style="margin-bottom: 20px;    width: 56%;" (click)="user = 'mobaxoj782@onlcool.com'; password = '123123'"  class="fadeIn fourth" value="Admin"  >
+            -->
 
             </form>
       </div>

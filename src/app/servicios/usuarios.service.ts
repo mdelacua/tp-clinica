@@ -60,7 +60,7 @@ export class UsuariosService {
     return new Promise<boolean>((resolve, reject) => {
 
       this.auth1 = getAuth();
-      onAuthStateChanged(this.auth1, async (user) => {
+      var obs = onAuthStateChanged(this.auth1, async (user) => {
         if (user) {        
           
           console.log('logeado') 
@@ -69,12 +69,14 @@ export class UsuariosService {
           //this.tipo = user.tipo;  
           if(user.email) await this.traerAtributosUsuario(user.email)
 
-          this.router.navigate(['/'+logeado])          
+          this.router.navigate(['/'+logeado])  
+          //obs()
           resolve(false);
 
         } else {
           console.log('no logeado') 
-          this.emailUsuario = null         
+          this.emailUsuario = null  
+          //obs()       
           resolve(true);      
         }
       });   
@@ -82,7 +84,7 @@ export class UsuariosService {
       console.log('finalizo')
       
     });
-
+    
   }
 
   async VerificarSesionUsuarioGuardPaginaLogeada(logeado:any){
@@ -255,7 +257,7 @@ CrearUsuarioAuth(email:any, password:any) {
     return querySnapshot;
   }
 
-  async TraerUsuarios(key:string, op:WhereFilterOp, value:string){
+  async TraerUsuarios(key:string, op:WhereFilterOp, value:any){
     const app = initializeApp(environment.firebase);
     const db = getFirestore(app); 
     const q = query(collection(db, "usuario"), where(key, op, value));

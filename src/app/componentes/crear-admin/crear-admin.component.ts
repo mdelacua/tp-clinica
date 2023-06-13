@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
@@ -15,6 +15,8 @@ import Swal from 'sweetalert2';
 })
 export class CrearAdminComponent {
 
+  @Input() recibeCaptcha: boolean =false  //CAPTCHA
+  
   form!: FormGroup;
   formNuevaEsp!: FormGroup;
 
@@ -78,8 +80,9 @@ export class CrearAdminComponent {
 
   ngOnDestroy(){
     console.log('ngOnDestroy')
+    this.recibeCaptcha = false
     //this.sesionUsuario.Unsubscribe()
-  } 
+  }
 
 
   async CrearUsuario(){
@@ -103,7 +106,7 @@ export class CrearAdminComponent {
       
       console.log(userCredential)  
       console.log(admin)  
-      this.servicioUsuario.CrearUsuario({...admin}, 'usuario')
+      await this.servicioUsuario.CrearUsuario({...admin}, 'usuario')
       this.servicioUsuario.CerrarSesionAuth()
       this.mostrarLoading = false
       this.NotificaionInicioSesion('Usuario Creado')

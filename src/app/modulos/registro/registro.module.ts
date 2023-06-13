@@ -10,6 +10,7 @@ import { CrearPacientesComponent } from 'src/app/componentes/crear-pacientes/cre
 import { ComponentesCreacionComponent } from '../componentes-creacion/componentes-creacion.component';
 import { ComponentesCreacionModule } from '../componentes-creacion/componentes-creacion.module';
 import { LoadingModule } from '../loading/loading.module';
+import { NgxCaptchaModule } from 'ngx-captcha';
 
 
 @NgModule({
@@ -23,7 +24,11 @@ import { LoadingModule } from '../loading/loading.module';
     RegistroRoutingModule,
     ReactiveFormsModule,
     ComponentesCreacionModule,
-    LoadingModule
+    LoadingModule,
+    NgxCaptchaModule
+  ],
+  exports:[
+    NgxCaptchaModule
   ]
 })
 export class RegistroModule { }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./crear-especialista.component.css']
 })
 export class CrearEspecialistaComponent {
+
+  @Input() recibeCaptcha: boolean =false  //CAPTCHA
 
   form!: FormGroup;
   formNuevaEsp!: FormGroup;
@@ -84,6 +86,7 @@ export class CrearEspecialistaComponent {
 
   ngOnDestroy(){
     console.log('ngOnDestroy')
+    this.recibeCaptcha = false
     //this.sesionUsuario.Unsubscribe()
   }
   
@@ -119,7 +122,7 @@ export class CrearEspecialistaComponent {
       
       console.log(userCredential)  
       console.log(especialista)  
-      this.servicioUsuario.CrearUsuario({...especialista}, 'usuario')
+      await this.servicioUsuario.CrearUsuario({...especialista}, 'usuario')
       this.servicioUsuario.CerrarSesionAuth()
       this.mostrarLoading = false
       this.NotificaionInicioSesion('Usuario Creado')

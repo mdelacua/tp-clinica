@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
+.imgSeleccion{
+  width: 350px;
+  height: 500px;
+}
 
 body {
     font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif; 

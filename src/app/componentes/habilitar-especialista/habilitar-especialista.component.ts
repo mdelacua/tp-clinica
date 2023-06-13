@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Unsubscribe } from '@angular/fire/firestore';
 import { onSnapshot } from '@firebase/firestore';
+import { Observable } from 'rxjs';
 import { Especialista } from 'src/app/clases/especialista';
 import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
@@ -13,6 +15,8 @@ export class HabilitarEspecialistaComponent {
 constructor(private servicioUsuario:UsuariosService){
 
 }
+
+  unsubscribe!:Unsubscribe
   especialistas: Especialista[] =[]
 
   mostrarLoading:boolean = false
@@ -23,7 +27,7 @@ constructor(private servicioUsuario:UsuariosService){
   var queryTraerPelis = this.servicioUsuario.TraerUsuarios('tipo', '==','especialista')
   this.mostrarLoading = true
 
-    const unsubscribe = onSnapshot( await queryTraerPelis, async (querySnapshot: any) => {
+    this.unsubscribe = onSnapshot( await queryTraerPelis, async (querySnapshot: any) => {
       
       this.especialistas = []
       querySnapshot.forEach(async (doc: any) => {
@@ -36,11 +40,18 @@ constructor(private servicioUsuario:UsuariosService){
      
     });
 }
-
+ngOnDestroy(): void {
+  //Called once, before the instance is destroyed.
+  //Add 'implements OnDestroy' to the class.
+  this.unsubscribe()
+}
 HabilitarEspecialista(habilitar:boolean, item:Especialista){
+  console.log('HabilitarEspecialista',item )
+  console.log('habilitar',habilitar )
   this.mostrarLoading = true
-  item.habilitado = habilitar
-  this.servicioUsuario.ActualizarUsuario(item.id, {...item}).finally(() =>{
+  //item.habilitado = habilitar
+  var habilitarAux = {"habilitado": habilitar}
+  this.servicioUsuario.ActualizarUsuario(item.id, habilitarAux).then(() =>{
     this.mostrarLoading = false
   })
   

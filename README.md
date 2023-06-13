@@ -1,27 +1,69 @@
-# TpClinica
+# TP Clinica
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+## Alumno
 
-## Development server
+De La Cuadra, Marcos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+# Descripcion
 
-## Running unit tests
+La clinica Online es una plataforma que le permite tanto a pacientes como especialistas poder gestionar turnos medicos.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#
+# Funcionalidades por usuario
 
-## Further help
+## Usuario Administrador
+- Puede ver todos los turnos en la aplicaicon y cancelarlos
+- Puede crear usuarios de tipo administrador/paciente/especialista
+- Puede hablitar/deshabilitar especialistas
+- Puede solicitar turnos para un paciente no registrado
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Usuario Especialista
+
+- Puede ver todos los turnos asignados a el mismo
+- - Puede cancelar el turno
+- - Puede aceptar el turno
+- - Puede finalizar un turno aceptado
+
+## Usuario Paciente
+
+- Puede solicitar un turno
+- Puede ver todos los turnos asignados a el mismo
+- - Puede cancelar el turno
+
+#
+
+# Acceso a la aplicacion
+
+- [URL para ingresar a la aplicacion TP Clinica](https://tp-clinica-2023.web.app/)
+
+# Paginas
+
+### Pagina Bienvenidos
+![Texto alternativo](/fotos_readme/bienvenidio.png "Título alternativo")
+
+### Pagina Login
+![Texto alternativo](/fotos_readme/Login.png "Título alternativo")
+
+### Pagina Seleccion de usuario a crear
+![Texto alternativo](/fotos_readme/registro_seleccion.png "Título alternativo")
+
+### Pagina Formulario de registro
+![Texto alternativo](/fotos_readme/formulario_registro.png "Título alternativo")
+
+
+### Pagina Principal Administrador
+![Texto alternativo](/fotos_readme/registro_admin.png "Título alternativo")
+
+### Pagina Principal Especialista
+![Texto alternativo](/fotos_readme/pantalla_especialista.png "Título alternativo")
+
+### Pagina Principal Paciente
+![Texto alternativo](/fotos_readme/registro_paciente.png "Título alternativo")
+
