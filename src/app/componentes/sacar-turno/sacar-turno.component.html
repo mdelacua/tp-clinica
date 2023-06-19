@@ -1,19 +1,50 @@
 <app-loading-comp [inputMostrarModal]="mostrarLoading"></app-loading-comp>
 <p>sacar-turno works!</p>
 
-<div *ngIf="especialidades">
+<div *ngIf="especialidades" >
     <label for="">Especilidad:</label>
-    <select #teams (change)="onSelected(teams.value)" class="custom-select d-block w-100 selectCustom" >
+    
+    <!-- <select #teams (change)="onSelected(teams.value)" class="custom-select d-block w-100 selectCustom" >
         <option disabled [selected]="true" value="">Seleccione una especialidad...</option>        
         <option *ngFor="let item of especialidades" [value]="item">{{item}}</option> 
-    </select>    
+    </select>     -->
+    <!-- MOSTRAR ESPECIALIDAD CON BOTON -->
+    <div style="display: flex;" >
+
+        <div *ngFor='let item of especialidades; let i=index' class="divEspecialidad" >  
+            <button *ngIf="item == 'Neurologo'" (click)="onSelectedV2($event, item)" [value]="item"  class="btn btn-outline-primary btsEspecialidad" style="background: url(../assets/img_esp/neurologo.png)">
+                
+            </button>
+            <button *ngIf="item == 'Pediatra'" (click)="onSelectedV2($event, item)" [value]="item"  class="btn btn-outline-primary btsEspecialidad" style="background: url(../assets/img_esp/pediatra.png)">
+                                
+            </button>
+            <button *ngIf="item != 'Pediatra' && item != 'Neurologo'" (click)="onSelectedV2($event, item)" [value]="item"  class="btn btn-outline-primary btsEspecialidad" style="background: url(../assets/img_esp/esp_default.png)">
+                                
+            </button>
+
+        </div>
+    </div>
+    <!-- FIN MOSTRAR ESPECIALIDAD CON BOTON -->
 </div>
 <div *ngIf="especialidadSeleccionada">
+
     <label for="">Especialista:</label>
-    <select #esp (change)="onSelectedEspecialista(esp.value, esp)"  id="selectEspecialista" class="custom-select d-block w-100 selectCustom" >
+    <!-- <select #esp (change)="onSelectedEspecialista(esp.value, esp)"  id="selectEspecialista" class="custom-select d-block w-100 selectCustom" >
         <option disabled [selected]="true" value="">Seleccione un Especialista...</option> 
         <option *ngFor='let item of especialistasPorEspecialidad' [value]="item.apellido" [id]="item.mail">{{item.apellido}}</option>
-    </select> 
+    </select>  -->
+    <!-- MOSTRAR ESPECIALSITA CON BOTON -->
+    <div *ngFor='let item of especialistasPorEspecialidad; let i=index' >  
+        <!-- <button (click)="onSelectedEspecialistaV2($event,item.apellido , item.mail)" [value]="item" [id]="item.mail" class="btn btn-outline-primary btsEspecialidad" >
+            {{item.apellido}}
+        </button> -->
+        <div (click)="onSelectedEspecialistaV2($event,item.apellido , item.mail)"  [id]="'esp_'+item.mail" class="btn btn-outline-primary btsEspecialidad">
+            <img [src]="item.imagen[0]" style="width: 70px; height: 70px;margin-top: 14px;" alt="">
+            {{item.apellido}}
+        </div>
+    </div>
+    <!-- FIN MOSTRAR ESPECIALSITA CON BOTON -->
+   
 
     <form [formGroup]="loginForm">
        <!-- <div *ngIf="especialistaSeleccionado ">
@@ -30,20 +61,75 @@
         -->
 
          <div *ngIf="especialistaSeleccionado">
-            <label for="">Fechas disponibles:</label>
-            <select #dias  (change)="onSelectedDiaSelect(dias.value)"class="custom-select d-block w-100 selectCustom"  >
-                <option disabled [selected]="true" value="">Seleccione un horario...</option> 
-                <option *ngFor='let item of fechasDisponibles' [value]="item">{{item}}</option>
-            </select>  
+             <!-- 
+                 <select #dias  (change)="onSelectedDiaSelect(dias.value)"class="custom-select d-block w-100 selectCustom"  >
+                     <option disabled [selected]="true" value="">Seleccione un horario...</option> 
+                     <option *ngFor='let item of fechasDisponibles' [value]="item">{{item}}</option>
+                    </select>   
+                -->
+                <!-- 
+                    nueva version con botones
+                -->
+            <div id="contenedorDeFechaYHora" style="display: flex;">
+                
+                <div class="contenedorDeUsuarios" >
+                    <label for="">Fechas disponibles:</label>
+                     <div *ngFor='let item of fechasDisponibles; let i=index' >  
+                        <button (click)="onSelectedDiaSelectv2($event, item)" [value]="item"  class="btn btn-outline-primary ">
+                            {{item}}
+                        </button>
+                        <!-- <div *ngIf="i<4">
+    
+                            <button (click)="onSelectedDiaSelectv2($event, item)" [value]="item" class="btn btn-outline-primary">{{item}}</button>
+                        </div>             
+                        <div *ngIf="i < 8 && i >= 4" >
+    
+                            <button (click)="onSelectedDiaSelectv2($event, item)" [value]="item" class="btn btn-outline-primary">{{item}}</button>
+                        </div>  
+                        <div *ngIf="i < 12 && i >= 8" >
+    
+                            <button (click)="onSelectedDiaSelectv2($event, item)" [value]="item" class="btn btn-outline-primary">{{item}}</button>
+                        </div>            
+                        <div *ngIf="i < 16 && i >= 12" >
+    
+                            <button (click)="onSelectedDiaSelectv2($event, item)" [value]="item" class="btn btn-outline-primary">{{item}}</button>
+                        </div>             -->
+                    </div>  
+                 </div>
+    
+                 <div *ngIf="diaSeleccionado && especialistaSeleccionado" class="contenedorDeUsuarios">
+                    <div *ngIf="arrayHoraPorDiaSeleccionado">
+                        <label for="">Horarios disponibles:</label>
+                        <div class="contenedorDeUsuarios">
+                            <div style="width: 100%;" *ngFor="let item of arrayHoraPorDiaSeleccionado">         
+                              <button class="btn btn-outline-primary" (click)="SeleccionHorario($event, item)" >
+                                {{item}}
+                              </button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div *ngIf="!arrayHoraPorDiaSeleccionado">
+                        <label for="">Todos los turnos fueron ocupados para la fecha seleccionada...:</label>
+                       
+                    </div>
+        
+                </div>
+             </div>
         </div>
 
+       
+        <br>
+
+        <!-- 
         <div *ngIf="diaSeleccionado && especialistaSeleccionado">
             <label for="">Horario:</label>
             <select #hora (change)="onSelectedHora(hora.value)" class="custom-select d-block w-100 selectCustom"  >
                 <option disabled [selected]="true" value="">Seleccione un horario...</option> 
                 <option *ngFor='let item of horariosDiasDeSemana' [value]="item">{{item}}</option>
             </select>  
-        </div>
+        </div> 
+        -->
     
     </form>
     <form [formGroup]="form" id="iniciarSesionForm" [style]="mostrarMail">
@@ -56,4 +142,4 @@
     </form>
 </div>
 
-<button [disabled]="!especialistaSeleccionado || !diaSeleccionado || !horaSeleccionado || form.invalid" (click)="CrearTurno()" type="button" class="btn btn-outline-danger">Crear Turno</button>
+<button [disabled]="!especialistaSeleccionado || !diaSeleccionado || !horaSeleccionada || form.invalid" (click)="CrearTurno()" type="button" class="btn btn-outline-danger">Crear Turno</button>

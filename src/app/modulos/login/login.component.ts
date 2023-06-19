@@ -99,7 +99,7 @@ export class LoginComponent {
   }
 
   async TraerUsuariosRapidos(){
-    var queryTraerPelis = this.servicioUsuario.TraerUsuarios('mail', 'in',['mobaxoj782@onlcool.com', 'xawiro8204@pyadu.com', 'satan97450@peogi.com', 'royol22540@rockdian.com', 'raxobol454@soremap.com'])
+    var queryTraerPelis = this.servicioUsuario.TraerUsuarios('mail', 'in',['mobaxoj782@onlcool.com', 'xawiro8204@pyadu.com', 'satan97450@peogi.com', 'royol22540@rockdian.com', 'raxobol454@soremap.com','lacef97061@bodeem.com'])
     this.mostrarLoading = true
 
     const unsubscribe = onSnapshot( await queryTraerPelis, async (querySnapshot: any) => {

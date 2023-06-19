@@ -6,7 +6,7 @@ export class Especialista extends Usuario{
     horarioAtencionInicio!:Date
     horarioAtencionFin!:Date
     horariosDeAtencion!:Array<string>
-    
+    horasConDiasEsp!:any
     constructor(nombre:string,apellido:string,edad:number,dni:number,mail:string,imagen:any[], especialidad:string){
        super(nombre,apellido,edad,dni,mail,imagen)
        this.especialidad = especialidad

@@ -40,28 +40,86 @@
                 {{item}} ,
             </span>
             <br><br>
-
-            <h2>Actualizar horarios:</h2>
+            <!-- DIAS Y HORAS DEL ESPECIALISTA-->
+            <div *ngIf="horasConDiasEsp">
+                <label for="">Dias y Horarios actuales disponibles:</label>
+                <br>
+                <label for="">Lunes:</label>
+                <span class="example-additional-selection">             
+                    {{horasConDiasEsp.Lunes}} ,                   
+                </span>
+                <br>
+                <label for="">Martes:</label>
+                <span class="example-additional-selection">             
+                    {{horasConDiasEsp.Martes}} ,                   
+                </span>
+                <br>
+                <label for="">Miercoles:</label>
+                <span class="example-additional-selection">             
+                    {{horasConDiasEsp.Miercoles}} ,                   
+                </span>
+                <br>
+                <label for="">Jueves:</label>
+                <span class="example-additional-selection">             
+                    {{horasConDiasEsp.Jueves}} ,                   
+                </span>
+                <br>
+                <label for="">Viernes:</label>
+                <span class="example-additional-selection">             
+                    {{horasConDiasEsp.Viernes}} ,                   
+                </span>
+                <br>
+                <label for="">Sabado:</label>
+                <span class="example-additional-selection">             
+                    {{horasConDiasEsp.Sabado}} ,                   
+                </span>
+                <br>
+                <label for="">Domingo:</label>
+                <span class="example-additional-selection">             
+                    {{horasConDiasEsp.Domingo}} ,                   
+                </span>
+                
+                <br><br>
+            </div>
+            <!-- FIN DIAS Y HORAS DEL ESPECIALISTA-->
+            
+            <h2>Seleccionar dia:</h2>
 
             <mat-form-field>
-                <mat-label>Seleccione sus horarios disponibles</mat-label>
-                <mat-select [formControl]="toppings" multiple>
-
-                    <mat-select-trigger>
-                        
-                        <!--<span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
-                        (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
-                        </span>-->
-                        <span *ngFor="let item of toppings.value" class="example-additional-selection">
-                            {{item}} ,
-                        </span>
-                    </mat-select-trigger>
-
-                    <mat-option *ngFor="let topping of horariosDiasDeSemana" [value]="topping">
-                        {{topping}}
-                    </mat-option>
+                <mat-label>Favorite food</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let food of foods" [value]="food.value" (click)="CambioDia(food.viewValue)">
+                    {{food.viewValue}}
+                  </mat-option>
                 </mat-select>
-            </mat-form-field>
+              </mat-form-field>
+
+            <div *ngIf="diaSeleciconado">
+
+                <h2>Actualizar horarios:</h2>
+    
+                <mat-form-field>
+                    <mat-label>Seleccione sus horarios disponibles</mat-label>
+                    <mat-select [formControl]="toppings" multiple>
+    
+                        <mat-select-trigger>
+                            
+                            <!--<span *ngIf="(toppings.value?.length || 0) > 1" class="example-additional-selection">
+                            (+{{(toppings.value?.length || 0) - 1}} {{toppings.value?.length === 2 ? 'other' : 'others'}})
+                            </span>-->
+                            <span *ngFor="let item of toppings.value" class="example-additional-selection">
+                                {{item}} ,
+                            </span>
+                        </mat-select-trigger>
+    
+                        <mat-option *ngFor="let topping of horariosDiasDeSemana" [value]="topping">
+                            {{topping}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+               
+            </div>
 
             <button class='btn btn-primary btn-lg btn-block' (click)="GuardarHorarios()">Guardar Nuevos Horarios</button>
 

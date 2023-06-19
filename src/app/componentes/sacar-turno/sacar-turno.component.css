@@ -1,8 +1,34 @@
+
+.btnSeleccionarFecha{
+  width: 50%;
+}
 .selectCustom{
     width: 100%!important;
     margin: auto;
     margin-bottom: 20px;
   }
+  .contenedorDeUsuarios{
+   width: 50%;
+  }
+.btsEspecialidad{
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  background-size: 110px!important;
+  background-repeat: no-repeat!important;
+  background-position: center!important;
+  
+}
+.imgEspecialidad{
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;  
+}
+.divEspecialidad{
+  margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
   
   select, input[type=text], [type=password]  {
     background-color: #f6f6f6;
