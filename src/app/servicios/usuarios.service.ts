@@ -284,6 +284,23 @@ CrearUsuarioAuth(email:any, password:any) {
       
     });
   }
+  async ActualizarUsuarioPorEmail(email:any, obj:any){
+    const app = initializeApp(environment.firebase);
+    const db = getFirestore(app); 
+    const actualizar = doc(db, "usuario", email);
+    const Collection = collection(db, "usuario");
+   // const q = query(collection(db, "actores"));
+    const q = query(Collection,where("mail", "==", email));
+      
+    const querySnapshot =  getDocs(q);
+    (await querySnapshot).forEach((doc) => {// TODO es necesaria esta query?
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.id, " => ", doc.data()); 
+      updateDoc(actualizar, obj);
+      
+      
+    });
+  }
 
  
 }

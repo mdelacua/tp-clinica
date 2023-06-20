@@ -1,6 +1,6 @@
 <app-loading-comp [inputMostrarModal]="mostrarLoading"></app-loading-comp>
 
-<h1>Habilitar Especialistas: </h1>
+<h1>Mis turnos: </h1>
 <div>
 
     <h5>Filtro por especialista / Paciente:</h5>
@@ -22,6 +22,7 @@
         <th scope="col">Cancelar Turno</th>
         <th scope="col">Aceptar Turno</th>
         <th scope="col">Finalizar Turno</th>
+        <th scope="col">Historia Clinica</th>
       </tr>
     </thead>
     <tbody *ngFor="let item of misTurnosAux; let i=index">
@@ -44,6 +45,9 @@
         <td > 
             <button [disabled]="item.estado != 'aceptado'" class='btn btn-primary btn-lg btn-block'(click)="FinalizarTurno(item)">Finalizar Turno</button>
         </td>
+        <td > 
+            <button [disabled]="item.estado != 'finalizado'" class='btn btn-primary btn-lg btn-block'(click)="OpenModalEncuesta(historiaClinica, item)">Historia clinica</button>
+        </td>
         
        
        
@@ -55,7 +59,7 @@
   <!--CANCELAR CON TEXTO OBLIGATORIO MODAL-->
   
   
-  <!-- Modal -->
+  <!-- Modal cancelar -->
   <ng-template #content let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Cancelar Turno</h4>
@@ -72,6 +76,96 @@
       <button [disabled]="!motivoCancelar" type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancelar Turno</button>
     </div>
   </ng-template>
+  <!-- FIN Modal cancelar -->
+  <!-- Modal HISTORIA CLINICA -->
+  <ng-template #historiaClinica let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Cargar historia clinica</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
 
+    <div style="display: flex;">
+
+      <!--temperatura  -->
+      <div class="modal-body">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">*Temperatura</span>
+        </div>
+        <input type="text" [(ngModel)]="temperatura" class="form-control" placeholder="Motivo" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <!-- FIN temperatura  -->
+      <!--presion  -->
+      <div class="modal-body">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">*Presion</span>
+        </div>
+        <input type="text" [(ngModel)]="presion" class="form-control" placeholder="Motivo" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <!-- FIN presion  -->
+    </div>
+
+    <div style="display: flex;">
+
+      <!--peso  -->
+      <div class="modal-body">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">*Peso</span>
+        </div>
+        <input type="text" [(ngModel)]="peso" class="form-control" placeholder="Motivo" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <!-- FIN peso  -->
+      <!--altura  -->
+      <div class="modal-body">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">*Altura</span>
+        </div>
+        <input type="text" [(ngModel)]="altura" class="form-control" placeholder="Motivo" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <!-- FIN altura  -->
+    </div>
+
+    <div style="display: flex;">
+
+      <!--campoUno  -->
+      <div class="modal-body">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">
+            <input type="text" [(ngModel)]="campoClaveUno" class="form-control" placeholder="Nuevo campo" aria-label="Username" aria-describedby="basic-addon1">
+          </span>
+        </div>
+        <input type="text" [(ngModel)]="campoValorUno" class="form-control" placeholder="Detalle" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <!-- FIN campoUno  -->
+      <!--campoDos  -->
+      <div class="modal-body">
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">
+            <input type="text" [(ngModel)]="campoClaveDos" class="form-control" placeholder="Nuevo campo" aria-label="Username" aria-describedby="basic-addon1">
+          </span>
+        </div>
+        <input type="text" [(ngModel)]="campoValorDos" class="form-control" placeholder="Detalle" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      <!-- FIN campoDos  -->
+
+    </div>
+
+     <!--campoTres  -->
+     <div class="modal-body">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">
+          <input type="text" [(ngModel)]="campoClaveTres" class="form-control" placeholder="Nuevo campo" aria-label="Username" aria-describedby="basic-addon1">
+        </span>
+      </div>
+      <input type="text" [(ngModel)]="campoValorTres" class="form-control" placeholder="Detalle" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <!-- FIN campoTres  -->
+
+    <div class="modal-footer">
+      <button [disabled]="!temperatura || !presion || !peso || !altura " type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">
+        Guardar historia clinica
+      </button>
+    </div>
+  </ng-template>
+  <!-- FIN Modal HISTORIA CLINICA -->
   <hr />
   
