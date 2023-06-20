@@ -18,6 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { PerfilAdminComponent } from 'src/app/componentes/perfil-admin/perfil-admin.component';
 import { PerfilPacienteComponent } from 'src/app/componentes/perfil-paciente/perfil-paciente.component';
 import { PacienteHistoriaClinicaComponent } from 'src/app/componentes/paciente-historia-clinica/paciente-historia-clinica.component';
+import { ExportarUsuariosComponent } from 'src/app/componentes/exportar-usuarios/exportar-usuarios.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -29,7 +30,8 @@ import { PacienteHistoriaClinicaComponent } from 'src/app/componentes/paciente-h
     PerfilEspecialistaComponent,
     PerfilAdminComponent,
     PerfilPacienteComponent,
-    PacienteHistoriaClinicaComponent
+    PacienteHistoriaClinicaComponent,
+    ExportarUsuariosComponent
   ],
   imports: [
     CommonModule,

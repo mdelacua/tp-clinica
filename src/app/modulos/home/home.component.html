@@ -9,7 +9,7 @@
           <div style="display: grid;">
             <span class="fs-4">Inicio Clinica</span>
             
-            <div style="display: flex; ">
+            <div style="display: flex; " >
                 <div *ngIf="infoUsuario">
                     <img [src]="infoUsuario.imagen[0]" class="imgBtn" >
                 </div>
@@ -35,6 +35,9 @@
           </li> 
           <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
               <a  (click)="BtnNavsetClicked('turnosAdmin','bienvenido')" [ngClass]="btnHeader.turnosAdmin ? 'nav-link active' :  'nav-link'" aria-current="page">Turnos</a>
+          </li> 
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('exportarUsuarios','bienvenido')" [ngClass]="btnHeader.exportarUsuarios ? 'nav-link active' :  'nav-link'" aria-current="page">Usuarios</a>
           </li> 
           <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
               <a  (click)="BtnNavsetClicked('sacarTurnoAdmin','bienvenido')" [ngClass]="btnHeader.sacarTurnoAdmin ? 'nav-link active' :  'nav-link'" aria-current="page">Solicitar Turno</a>
@@ -67,26 +70,31 @@
         <!-- USUARIO ADMIN-->
         <div *ngIf="infoUsuario && infoUsuario.tipo == 'admin'">
             
-                <div *ngIf="btnHeader.perfilAdm">
+                <div *ngIf="btnHeader.perfilAdm" class="slide-top">
 
                     <app-perfil-admin></app-perfil-admin>
                 </div>
-                <div *ngIf="btnHeader.habilitarEspecialista">
+                <div *ngIf="btnHeader.habilitarEspecialista" class="flip-scale-down-hor">
                 
                     <app-habilitar-especialista></app-habilitar-especialista>
                 
                 </div>
-                <div *ngIf="btnHeader.turnosAdmin">
+                <div *ngIf="btnHeader.turnosAdmin" class="slide-top">
                 
                     <app-turnos-administrador></app-turnos-administrador>
                 
                 </div>
-                <div *ngIf="btnHeader.sacarTurnoAdmin">
+                <div *ngIf="btnHeader.exportarUsuarios" class="flip-scale-down-hor">
+                
+                    <app-exportar-usuarios></app-exportar-usuarios>
+                
+                </div>
+                <div *ngIf="btnHeader.sacarTurnoAdmin" class="slide-top">
                 
                     <app-sacar-turno [mostrarMail]="'display:block'"></app-sacar-turno>
                 
                 </div>
-                <div *ngIf="btnHeader.crearUsuarios">
+                <div *ngIf="btnHeader.crearUsuarios" class="flip-scale-down-hor">
                     
                     <div class="wrapper fadeInDown">
                         <div id="formContent">
@@ -165,15 +173,15 @@
 
         <!-- USUARIO PACIENTE-->
         <div *ngIf="infoUsuario && infoUsuario.tipo == 'paciente'">
-            <div *ngIf="btnHeader.sacarTurno">
+            <div *ngIf="btnHeader.sacarTurno" class="flip-scale-down-hor">
 
                 <app-sacar-turno></app-sacar-turno>
             </div>
-            <div *ngIf="btnHeader.misTurnos">
+            <div *ngIf="btnHeader.misTurnos" class="slide-top">
 
                 <app-turnos-paciente></app-turnos-paciente>
             </div>
-            <div *ngIf="btnHeader.perfilPaciente">
+            <div *ngIf="btnHeader.perfilPaciente" class="flip-scale-down-hor">
 
                 <app-perfil-paciente></app-perfil-paciente>
             </div>
@@ -184,11 +192,11 @@
         <!-- USUARIO especialista-->
         <div *ngIf="infoUsuario && infoUsuario.tipo == 'especialista'">
             
-            <div *ngIf="btnHeader.misTurnos">
+            <div *ngIf="btnHeader.misTurnos" class="flip-scale-down-hor">
 
                 <app-turnos-especialista></app-turnos-especialista>
             </div>
-            <div *ngIf="btnHeader.perfilEsp">
+            <div *ngIf="btnHeader.perfilEsp" class="slide-top">
 
                 <app-perfil-especialista></app-perfil-especialista>
             </div>

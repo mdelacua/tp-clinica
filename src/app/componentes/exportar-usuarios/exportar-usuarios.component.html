@@ -1,0 +1,43 @@
+<app-loading-comp [inputMostrarModal]="mostrarLoading"></app-loading-comp>
+<div id="datosPrincipales" >
+        
+    <!-- PDFFFFFFFFF-->
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" id="htmlData">
+                <img style="margin-left: 50%;" src="./assets/icono_clinica.png">
+
+                <h1> Clinica TP</h1>
+                
+
+                <table id="excel-table">
+                    <tr class="table-primary">
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Mail</th>
+                        <th>Altura</th>
+                        <th>Peso</th>
+                        <th>Presion</th>
+                        <th>Temperatura</th>
+                        
+                    </tr>
+                    <tr *ngFor="let item of pacientes" >
+                        <td>{{item.nombre }}</td>
+                        <td>{{item.apellido }}</td>
+                        <td>{{item.mail }}</td>
+                        <td>{{item.historiaClinica.altura }}</td>
+                        <td>{{item.historiaClinica.peso}}</td>
+                        <td>{{item.historiaClinica.presion}}</td>
+                        <td>{{item.historiaClinica.temperatura}}</td>
+                        
+                    </tr>
+                </table>
+                <button class="btn btn-success btn-block" (click)="exportexcel()">Exportar a Execl</button>
+ 
+               
+        </div>
+        
+    </div>
+    </div>
+</div>
