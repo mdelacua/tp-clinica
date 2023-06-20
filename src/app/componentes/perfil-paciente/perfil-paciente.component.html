@@ -4,7 +4,10 @@
     <ul class="nav nav-pills">
 
         <li class="nav-item">
-        <a (click)="CambiarFormulario('datosPrincipales'); " [ngClass]="btnForms.datosPrincipales ? 'nav-link active' :  'nav-link'" aria-current="page">datosPrincipales</a>
+        <a (click)="CambiarFormulario('datosPrincipales'); " [ngClass]="btnForms.datosPrincipales ? 'nav-link active' :  'nav-link'" aria-current="page">Mi perfil</a>
+        </li>          
+        <li class="nav-item">
+        <a (click)="CambiarFormulario('historiaClinica'); " [ngClass]="btnForms.historiaClinica ? 'nav-link active' :  'nav-link'" aria-current="page">Historia Clinica</a>
         </li>          
         
 
@@ -14,7 +17,6 @@
 
     <div id="datosPrincipales" *ngIf="btnForms.datosPrincipales">
         
-        <p>perfil-especialista works!</p>
         <h1>Informacion del usuario</h1>
         <h5> Nombre: {{datosUsuario.nombre}}</h5>
         <h5>Apellido: {{datosUsuario.apellido}}</h5>
@@ -27,6 +29,51 @@
 
                 <img [src]="item" class="imgBtn" >
             </div>
+        </div>
+    </div>
+    <div id="datosPrincipales" *ngIf="btnForms.historiaClinica">
+        
+        <!-- PDFFFFFFFFF-->
+        <div *ngIf="!datosUsuario.historiaClinica">
+            <h1>Aun no tiene historia clinica</h1>
+        </div>
+        <div *ngIf="datosUsuario.historiaClinica" class="container">
+            <div class="row">
+                <div class="col-md-8" id="htmlData">
+                    <img style="margin-left: 50%;" src="./assets/icono_clinica.png">
+
+                    <h1> Clinica TP</h1>
+
+                    <h5> Nombre: {{datosUsuario.nombre}}</h5>
+                    <h5> Apellido: {{datosUsuario.apellido}}</h5>
+
+                    <table class="table table-bordered">
+                        <tr class="table-primary">
+                            <th>Altura</th>
+                            <th>Peso</th>
+                            <th>Presion</th>
+                            <th>Temperatura</th>
+                            <th *ngIf="datosUsuario.historiaClinica.dinamicos[0].clave">{{datosUsuario.historiaClinica.dinamicos[0].clave}}</th>
+                            <th *ngIf="datosUsuario.historiaClinica.dinamicos[1].clave">{{datosUsuario.historiaClinica.dinamicos[1].clave}}</th>
+                            <th *ngIf="datosUsuario.historiaClinica.dinamicos[2].clave">{{datosUsuario.historiaClinica.dinamicos[2].clave}}</th>
+                        </tr>
+                        <tr >
+                            <th>{{datosUsuario.historiaClinica.altura }}</th>
+                            <td>{{datosUsuario.historiaClinica.peso}}</td>
+                            <td>{{datosUsuario.historiaClinica.presion}}</td>
+                            <td>{{datosUsuario.historiaClinica.temperatura}}</td>
+                            <td *ngIf="datosUsuario.historiaClinica.dinamicos[0].valor">{{datosUsuario.historiaClinica.dinamicos[0].valor}}</td>
+                            <td *ngIf="datosUsuario.historiaClinica.dinamicos[1].valor">{{datosUsuario.historiaClinica.dinamicos[1].valor}}</td>
+                            <td *ngIf="datosUsuario.historiaClinica.dinamicos[2].valor">{{datosUsuario.historiaClinica.dinamicos[2].valor}}</td>
+                        </tr>
+                    </table>
+                    
+                    <span>Fecha emisión: {{fechaActual}}</span>
+            </div>
+            <div style="margin-top: 20px;">
+                <button class="btn btn-success btn-block" (click)="openPDF()">Descargar historia clinica</button>
+            </div>
+        </div>
         </div>
     </div>
 

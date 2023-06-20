@@ -17,6 +17,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import { PerfilAdminComponent } from 'src/app/componentes/perfil-admin/perfil-admin.component';
 import { PerfilPacienteComponent } from 'src/app/componentes/perfil-paciente/perfil-paciente.component';
+import { PacienteHistoriaClinicaComponent } from 'src/app/componentes/paciente-historia-clinica/paciente-historia-clinica.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -27,7 +28,8 @@ import { PerfilPacienteComponent } from 'src/app/componentes/perfil-paciente/per
     TurnosAdministradorComponent,
     PerfilEspecialistaComponent,
     PerfilAdminComponent,
-    PerfilPacienteComponent
+    PerfilPacienteComponent,
+    PacienteHistoriaClinicaComponent
   ],
   imports: [
     CommonModule,
