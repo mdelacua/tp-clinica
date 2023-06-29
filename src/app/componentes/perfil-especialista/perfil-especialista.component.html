@@ -4,10 +4,10 @@
     <ul class="nav nav-pills">
 
         <li class="nav-item">
-        <a (click)="CambiarFormulario('datosPrincipales'); " [ngClass]="btnForms.datosPrincipales ? 'nav-link active' :  'nav-link'" aria-current="page">datosPrincipales</a>
+        <a (click)="CambiarFormulario('datosPrincipales'); " [ngClass]="btnForms.datosPrincipales ? 'nav-link active' :  'nav-link'" aria-current="page">Datos del Especialista</a>
         </li>          
         <li class="nav-item">
-            <a (click)="CambiarFormulario('horariosDisponibles'); " [ngClass]="btnForms.horariosDisponibles ? 'nav-link active' :  'nav-link'" aria-current="page">horariosDisponibles</a>
+            <a (click)="CambiarFormulario('horariosDisponibles'); " [ngClass]="btnForms.horariosDisponibles ? 'nav-link active' :  'nav-link'" aria-current="page">Horarios Disponibles</a>
         </li>  
 
     </ul>
@@ -16,7 +16,7 @@
 
     <div id="datosPrincipales" *ngIf="btnForms.datosPrincipales">
         
-        <p>perfil-especialista works!</p>
+        
         <h1>Informacion del usuario</h1>
         <h5> Nombre: {{datosUsuario.nombre}}</h5>
         <h5>Apellido: {{datosUsuario.apellido}}</h5>
@@ -35,14 +35,12 @@
     <div id="horariosDisponibles" *ngIf="btnForms.horariosDisponibles">
         <div >           
             
-            <label for="">Horarios actuales disponibles:</label>
-            <span *ngFor="let item of horariosDeEspecialista" class="example-additional-selection">
-                {{item}} ,
-            </span>
+            
             <br><br>
             <!-- DIAS Y HORAS DEL ESPECIALISTA-->
             <div *ngIf="horasConDiasEsp">
-                <label for="">Dias y Horarios actuales disponibles:</label>
+                
+                <h2>Dias y Horarios actuales disponibles:</h2>
                 <br>
                 <label for="">Lunes:</label>
                 <span class="example-additional-selection">             
@@ -86,7 +84,7 @@
             <h2>Seleccionar dia:</h2>
 
             <mat-form-field>
-                <mat-label>Favorite food</mat-label>
+                <mat-label>Dia de la semana</mat-label>
                 <mat-select>
                   <mat-option *ngFor="let food of foods" [value]="food.value" (click)="CambioDia(food.viewValue)">
                     {{food.viewValue}}
@@ -122,7 +120,7 @@
             </div>
 
             <button class='btn btn-primary btn-lg btn-block' (click)="GuardarHorarios()">Guardar Nuevos Horarios</button>
-
+            <br><br>
         </div>
         
     </div>

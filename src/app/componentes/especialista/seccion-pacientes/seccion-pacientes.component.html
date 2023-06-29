@@ -1,0 +1,116 @@
+
+<div id="cards" class="card-group">
+
+    <div class="card" style="width: 18rem;" *ngFor="let usuarioUnico of pacientes">
+      
+      <img  style="width: 200px;margin: auto;height: 200px;" class="card-img-top" [src]="usuarioUnico.imagen[0]" alt="Card image cap">     
+      
+      <div class="card-body">
+        <h5 class="card-title">Mail del usuario: {{ usuarioUnico.mail }}</h5>
+          <div style="height: 110px;">
+
+            <div *ngFor="let turnoDelUsuario of misTurnosAux" >
+              <ng-container *ngIf="usuarioUnico.mail == turnoDelUsuario.mailUsuario ">
+                <p class="card-text">Turno: {{ turnoDelUsuario.diaTurno }} , {{ turnoDelUsuario.horaTurno }}</p>
+              </ng-container>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button class='btn btn-primary btn-lg btn-block'(click)="OpenModalEncuesta(historiaClinica, usuarioUnico.historiaClinica
+            )">Historia clinica</button>         
+          </div>
+      </div>
+        
+    </div>
+</div>
+
+ <!-- Modal HISTORIA CLINICA -->
+ <ng-template #historiaClinica let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title"> Historia clinica</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div style="display: flex;">
+
+    <!--temperatura  -->
+    <div class="modal-body">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">*Temperatura</span>
+      </div>
+      <input type="text" disabled="true" [(ngModel)]="temperatura" class="form-control" placeholder="Motivo" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <!-- FIN temperatura  -->
+    <!--presion  -->
+    <div class="modal-body">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">*Presion</span>
+      </div>
+      <input type="text" disabled="true" [(ngModel)]="presion" class="form-control" placeholder="Motivo" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <!-- FIN presion  -->
+  </div>
+
+  <div style="display: flex;">
+
+    <!--peso  -->
+    <div class="modal-body">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">*Peso</span>
+      </div>
+      <input type="text" disabled="true" [(ngModel)]="peso" class="form-control" placeholder="Motivo" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <!-- FIN peso  -->
+    <!--altura  -->
+    <div class="modal-body">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">*Altura</span>
+      </div>
+      <input type="text" disabled="true" [(ngModel)]="altura" class="form-control" placeholder="Motivo" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <!-- FIN altura  -->
+  </div>
+
+  <div style="display: flex;">
+
+    <!--campoUno  -->
+    <div class="modal-body">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">
+          <input type="text" disabled="true" [(ngModel)]="campoClaveUno" class="form-control" placeholder="Nuevo campo" aria-label="Username" aria-describedby="basic-addon1">
+        </span>
+      </div>
+      <input type="text" disabled="true" [(ngModel)]="campoValorUno" class="form-control" placeholder="Detalle" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <!-- FIN campoUno  -->
+    <!--campoDos  -->
+    <div class="modal-body">
+      <div class="input-group-append">
+        <span class="input-group-text" id="basic-addon2">
+          <input type="text" disabled="true" [(ngModel)]="campoClaveDos" class="form-control" placeholder="Nuevo campo" aria-label="Username" aria-describedby="basic-addon1">
+        </span>
+      </div>
+      <input type="text" disabled="true" [(ngModel)]="campoValorDos" class="form-control" placeholder="Detalle" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <!-- FIN campoDos  -->
+
+  </div>
+
+   <!--campoTres  -->
+   <div class="modal-body">
+    <div class="input-group-append">
+      <span class="input-group-text" id="basic-addon2">
+        <input type="text" disabled="true" [(ngModel)]="campoClaveTres" class="form-control" placeholder="Nuevo campo" aria-label="Username" aria-describedby="basic-addon1">
+      </span>
+    </div>
+    <input type="text" disabled="true" [(ngModel)]="campoValorTres" class="form-control" placeholder="Detalle" aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+  <!-- FIN campoTres  -->
+
+  <div class="modal-footer">
+    <button  type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">
+      Salir
+    </button>
+  </div>
+</ng-template>
+<!-- FIN Modal HISTORIA CLINICA -->

@@ -6,6 +6,10 @@ import { UsuariosService } from 'src/app/servicios/usuarios.service';
 
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { TurnosService } from 'src/app/servicios/turnos.service';
+
+import { getDocs } from "firebase/firestore";
+import { Turno } from 'src/app/clases/turno';
 
 @Component({
   selector: 'app-perfil-paciente',
@@ -21,8 +25,10 @@ export class PerfilPacienteComponent {
   }
   datosUsuario!:Paciente
   fechaActual!:string
+  mailEspecialidad:Array<string>= []
+  especialistaSeleccionado:string = ''
 
-  constructor(private servicioUsuario:UsuariosService){
+  constructor(private servicioTurnos:TurnosService, private servicioUsuario:UsuariosService){
     
   }
   ngOnInit(): void {
@@ -35,8 +41,45 @@ export class PerfilPacienteComponent {
     }
    
     this.fechaActual = this.FechaActual()
+    this.TraerTurnosDePaciente()
    
   }
+  async TraerTurnosDePaciente(){
+    
+
+      this.datosUsuario.turnos = []
+
+      var q = await this.servicioTurnos.TraerDatosAsync("mailUsuario", "==",this.datosUsuario.mail, 'estado', '==', 'finalizado')
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        
+        console.log(doc.id, " => ", doc.data());
+        var datosQuery = doc.data() as Turno
+        if(datosQuery){
+          
+          this.datosUsuario.turnos.push( datosQuery ) 
+        }
+      });
+
+      this.TraerEspecialistas()
+    
+      console.log("pacientes con turnos", this.datosUsuario)
+  }
+
+  TraerEspecialistas(){    
+    this.mailEspecialidad = []
+    
+    var valueArr = this.datosUsuario.turnos.map(function(item){ return item.especialidad });
+    var emailSinDuplicados = [...new Set(valueArr)]   
+    this.mailEspecialidad = emailSinDuplicados;
+    console.log('this.mailEspecialidad',this.mailEspecialidad)
+  }
+
+  onSelectedDiaSelect(value:string): void {
+    console.log(value)   
+    this.especialistaSeleccionado = value
+	}
   
   CambiarFormulario(keyJson:any){
     Object.keys(this.btnForms).forEach((key) =>{
@@ -64,7 +107,7 @@ export class PerfilPacienteComponent {
       let PDF = new jsPDF('p', 'mm', 'a4');
       let position = 0;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      PDF.save('angular-demo.pdf');
+      PDF.save('datos_de_paciente.pdf');
     });
   }
 

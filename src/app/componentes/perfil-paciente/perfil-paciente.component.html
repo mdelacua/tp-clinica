@@ -39,40 +39,80 @@
         </div>
         <div *ngIf="datosUsuario.historiaClinica" class="container">
             <div class="row">
-                <div class="col-md-8" id="htmlData">
+                <div id="htmlData">
                     <img style="margin-left: 50%;" src="./assets/icono_clinica.png">
 
                     <h1> Clinica TP</h1>
 
-                    <h5> Nombre: {{datosUsuario.nombre}}</h5>
-                    <h5> Apellido: {{datosUsuario.apellido}}</h5>
+                    <!-- <h5> Nombre: {{datosUsuario.nombre}}</h5>
+                    <h5> Apellido: {{datosUsuario.apellido}}</h5> -->
 
                     <table class="table table-bordered">
-                        <tr class="table-primary">
-                            <th>Altura</th>
-                            <th>Peso</th>
-                            <th>Presion</th>
-                            <th>Temperatura</th>
-                            <th *ngIf="datosUsuario.historiaClinica.dinamicos[0].clave">{{datosUsuario.historiaClinica.dinamicos[0].clave}}</th>
-                            <th *ngIf="datosUsuario.historiaClinica.dinamicos[1].clave">{{datosUsuario.historiaClinica.dinamicos[1].clave}}</th>
-                            <th *ngIf="datosUsuario.historiaClinica.dinamicos[2].clave">{{datosUsuario.historiaClinica.dinamicos[2].clave}}</th>
-                        </tr>
-                        <tr >
-                            <th>{{datosUsuario.historiaClinica.altura }}</th>
-                            <td>{{datosUsuario.historiaClinica.peso}}</td>
-                            <td>{{datosUsuario.historiaClinica.presion}}</td>
-                            <td>{{datosUsuario.historiaClinica.temperatura}}</td>
-                            <td *ngIf="datosUsuario.historiaClinica.dinamicos[0].valor">{{datosUsuario.historiaClinica.dinamicos[0].valor}}</td>
-                            <td *ngIf="datosUsuario.historiaClinica.dinamicos[1].valor">{{datosUsuario.historiaClinica.dinamicos[1].valor}}</td>
-                            <td *ngIf="datosUsuario.historiaClinica.dinamicos[2].valor">{{datosUsuario.historiaClinica.dinamicos[2].valor}}</td>
-                        </tr>
+                        <thead class="thead-dark">
+
+                            <tr class="table-primary">
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Altura</th>
+                                <th>Peso</th>
+                                <th>Presion</th>
+                                <th>Temperatura</th>
+                                <th *ngIf="datosUsuario.historiaClinica.dinamicos[0].clave">{{datosUsuario.historiaClinica.dinamicos[0].clave}}</th>
+                                <th *ngIf="datosUsuario.historiaClinica.dinamicos[1].clave">{{datosUsuario.historiaClinica.dinamicos[1].clave}}</th>
+                                <th *ngIf="datosUsuario.historiaClinica.dinamicos[2].clave">{{datosUsuario.historiaClinica.dinamicos[2].clave}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr >
+                                <td>{{datosUsuario.nombre }}</td>
+                                <td>{{datosUsuario.apellido }}</td>
+                                <td>{{datosUsuario.historiaClinica.altura }}</td>
+                                <td>{{datosUsuario.historiaClinica.peso}}</td>
+                                <td>{{datosUsuario.historiaClinica.presion}}</td>
+                                <td>{{datosUsuario.historiaClinica.temperatura}}</td>
+                                <td *ngIf="datosUsuario.historiaClinica.dinamicos[0].valor">{{datosUsuario.historiaClinica.dinamicos[0].valor}}</td>
+                                <td *ngIf="datosUsuario.historiaClinica.dinamicos[1].valor">{{datosUsuario.historiaClinica.dinamicos[1].valor}}</td>
+                                <td *ngIf="datosUsuario.historiaClinica.dinamicos[2].valor">{{datosUsuario.historiaClinica.dinamicos[2].valor}}</td>
+                            </tr>
+                        </tbody>
                     </table>
-                    
+
+                    <select #especialista  (change)="onSelectedDiaSelect(especialista.value)" class="custom-select d-block w-100 selectCustom" >
+                        <option disabled [selected]="true" value="">Seleccione un especialista...</option>                        
+                        <option *ngFor='let item of mailEspecialidad' [value]="item">{{item}}</option> 
+                    </select>   
+                    <br>
+
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+
+                            <tr class="table-primary" style="text-wrap: nowrap;">                                
+                                <th>Especialista:</th>
+                                <th>Turno Fecha:</th>
+                                <th>Turno Horario:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let item of datosUsuario.turnos" style="text-wrap: nowrap;">
+                                       
+                                <ng-container *ngIf="especialistaSeleccionado == item.especialidad">
+                                    <td>{{item.apellidoEspecialista }}</td>                               
+                                    <td>{{item.diaTurno }}</td>                               
+                                    <td>{{item.horaTurno }}</td> 
+                                </ng-container>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+
                     <span>Fecha emisión: {{fechaActual}}</span>
             </div>
             <div style="margin-top: 20px;">
                 <button class="btn btn-success btn-block" (click)="openPDF()">Descargar historia clinica</button>
             </div>
+            <br><br><br>
         </div>
         </div>
     </div>

@@ -33,6 +33,8 @@ export class HomeComponent {
     "perfilPaciente": false,
     "perfilAdm": false,
     "exportarUsuarios": false,
+    "espSeccionPaciente": false,
+    "mostrarGraficos": false,
     "misTurnos" : false, //TODO colocar en false al terminar
   }
   usuario:any = null

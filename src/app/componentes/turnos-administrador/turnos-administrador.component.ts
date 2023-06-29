@@ -88,13 +88,30 @@ export class TurnosAdministradorComponent {
       querySnapshot.forEach(async (doc: any) => {
       
         console.log(doc.data())
-        this.misTurnos.push( doc.data() )
+        var turno:Turno =doc.data() as Turno
+        turno.turnoDiaConHoraEnSeg = this.CalcularHorarioDeTurnos(turno.diaTurno, turno.horaTurno)
+        this.misTurnos.push( turno )
       }); 
+      this.ordenarListaMayorAMenor()
       this.misTurnosAux = this.misTurnos.slice();
       this.mostrarLoading = false
 
      
     });
+  }
+  CalcularHorarioDeTurnos(dia:string, hora:string){
+    
+    var arrDiaAux = dia.split('/')    
+    var arrHoraAux = hora.split(':')    
+    
+    var diaYhoraStr = arrDiaAux[1] + '-' +  arrDiaAux[0] + '-' + arrDiaAux[2] + ' ' + arrHoraAux[0] + ':' + arrHoraAux[1]
+    return new Date( diaYhoraStr ).getTime()
+  }
+  public ordenarListaMayorAMenor() {   
+    const sorter = (a:any, b:any) => {
+      return  b.turnoDiaConHoraEnSeg - a.turnoDiaConHoraEnSeg; // mayor a menor      
+    };        
+    this.misTurnos = this.misTurnos.sort(sorter) ;
   }
 
   CancelarTurno(turno:Turno){

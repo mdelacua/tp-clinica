@@ -19,6 +19,14 @@ import { PerfilAdminComponent } from 'src/app/componentes/perfil-admin/perfil-ad
 import { PerfilPacienteComponent } from 'src/app/componentes/perfil-paciente/perfil-paciente.component';
 import { PacienteHistoriaClinicaComponent } from 'src/app/componentes/paciente-historia-clinica/paciente-historia-clinica.component';
 import { ExportarUsuariosComponent } from 'src/app/componentes/exportar-usuarios/exportar-usuarios.component';
+import { SeccionPacientesComponent } from 'src/app/componentes/especialista/seccion-pacientes/seccion-pacientes.component';
+import { GraficosComponent } from 'src/app/componentes/graficos/graficos.component';
+import { CapitalizePipe, formatoFechaPipe } from 'src/app/pipes/capitalize.pipe';
+import { MisDirectivasDirective } from 'src/app/directives/mis-directivas.directive';
+import { EstadosDirective } from 'src/app/directives/estados.directive';
+import { AnimacionesDirective } from 'src/app/directives/animaciones.directive';
+import { InputTextDirective } from 'src/app/directives/input-text.directive';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -31,7 +39,15 @@ import { ExportarUsuariosComponent } from 'src/app/componentes/exportar-usuarios
     PerfilAdminComponent,
     PerfilPacienteComponent,
     PacienteHistoriaClinicaComponent,
-    ExportarUsuariosComponent
+    ExportarUsuariosComponent,
+    SeccionPacientesComponent,
+    GraficosComponent,
+    CapitalizePipe, 
+    formatoFechaPipe,
+    MisDirectivasDirective, 
+    EstadosDirective, 
+    AnimacionesDirective, 
+    InputTextDirective
   ],
   imports: [
     CommonModule,

@@ -13,6 +13,9 @@ export class Turno {
     motivoCancelamiento!:string
     idPaciente!:string
     id!:string
+    imagenPaciente!:string
+
+    turnoDiaConHoraEnSeg!:number
 
     historiaClinica:any = {
         altura: '',

@@ -3,41 +3,131 @@
         
     <!-- PDFFFFFFFFF-->
     
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8" id="htmlData">
-                <img style="margin-left: 50%;" src="./assets/icono_clinica.png">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8" id="htmlData">
+                    <img style="margin-left: 50%;" src="./assets/icono_clinica.png">
 
-                <h1> Clinica TP</h1>
+                    <h1> Clinica TP</h1>
+                    
+
+                    <table  class="table" id="excel-table" >
+                        <thead class="thead-dark">
+
+                            <tr class="table-primary" style="text-wrap: nowrap;">
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Mail</th>
+                                <th>Altura</th>
+                                <th>Peso</th>
+                                <th>Presion</th>
+                                <th>Temperatura</th>
+                                <th>Agregado 1</th>
+                                <th>Agregado 2</th>
+                                <th>Agregado 3</th>
+                                
+                                <!--
+                                <th *ngIf="pacientes.historiaClinica.dinamicos[0].clave">{{pacientes.historiaClinica.dinamicos[0].clave}}</th>
+                                <th *ngIf="pacientes.historiaClinica.dinamicos[1].clave">{{pacientes.historiaClinica.dinamicos[1].clave}}</th>
+                                <th *ngIf="pacientes.historiaClinica.dinamicos[2].clave">{{pacientes.historiaClinica.dinamicos[2].clave}}</th>
+                                -->
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr *ngFor="let item of pacientes" style="text-wrap: nowrap;">
+                                <td>{{item.nombre }}</td>
+                                <td>{{item.apellido }}</td>
+                                <td>{{item.mail }}</td>
+                                <td>{{item.historiaClinica.altura }}</td>
+                                <td>{{item.historiaClinica.peso}}</td>
+                                <td>{{item.historiaClinica.presion}}</td>
+                                <td>{{item.historiaClinica.temperatura}}</td>
+                                                    
+                                <td *ngIf="item.historiaClinica.dinamicos[0].valor">{{item.historiaClinica.dinamicos[0].clave}}: {{item.historiaClinica.dinamicos[0].valor}}</td>
+                                <td *ngIf="item.historiaClinica.dinamicos[1].valor">{{item.historiaClinica.dinamicos[1].clave}}: {{item.historiaClinica.dinamicos[0].valor}}</td>
+                                <td *ngIf="item.historiaClinica.dinamicos[2].valor">{{item.historiaClinica.dinamicos[2].clave}}: {{item.historiaClinica.dinamicos[0].valor}}</td>
+                                
+                            
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-success btn-block" (click)="exportexcel('excel-table')">Exportar a Excel</button>
+                    <br><br>
                 
-
-                <table id="excel-table">
-                    <tr class="table-primary">
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Mail</th>
-                        <th>Altura</th>
-                        <th>Peso</th>
-                        <th>Presion</th>
-                        <th>Temperatura</th>
-                        
-                    </tr>
-                    <tr *ngFor="let item of pacientes" >
-                        <td>{{item.nombre }}</td>
-                        <td>{{item.apellido }}</td>
-                        <td>{{item.mail }}</td>
-                        <td>{{item.historiaClinica.altura }}</td>
-                        <td>{{item.historiaClinica.peso}}</td>
-                        <td>{{item.historiaClinica.presion}}</td>
-                        <td>{{item.historiaClinica.temperatura}}</td>
-                        
-                    </tr>
-                </table>
-                <button class="btn btn-success btn-block" (click)="exportexcel()">Exportar a Execl</button>
- 
-               
+                </div>
+            
+            </div>
         </div>
+
+
+    <div>
         
-    </div>
+        <div id="cards" >
+
+            <div class="card"  *ngFor="let usuarioUnico of pacientes;  let i=index">
+            
+                <img  style="width: 200px;margin: auto;height: 200px;" class="card-img-top" [src]="usuarioUnico.imagen[0]" alt="Card image cap">     
+                
+                <div class="card-body">
+                    <h5 class="card-title">Mail del usuario: {{ usuarioUnico.mail }}</h5>
+                    <div style="height: 100%;">
+
+                        <div *ngFor="let turnoDelUsuario of usuarioUnico.turnos" >
+                            <p style="margin: auto;">Especialista: {{ turnoDelUsuario.apellidoEspecialista }} </p>
+                            <p style="margin: auto;">Turno: {{ turnoDelUsuario.diaTurno }} , {{ turnoDelUsuario.horaTurno }}</p>
+                            ------------------
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <table [id]="'excel-table'+i" style="display: none;">
+                            <tr class="table-primary" style="text-wrap: nowrap;">
+                                <th>Nombre:</th>
+                                <th>Apellido:</th>
+                                <th>Mail:</th>
+                                <th>Altura:</th>
+                                <th>Peso:</th>
+                                <th>Presion:</th>
+                                <th>Temperatura:</th>
+                                <th>Agregado 1:</th>
+                                <th>Agregado 2:</th>
+                                <th>Agregado 3:</th>
+                                
+                            </tr>
+                            <tr  style="text-wrap: nowrap;">
+                                <td>{{usuarioUnico.nombre }}</td>
+                                <td>{{usuarioUnico.apellido }}</td>
+                                <td>{{usuarioUnico.mail }}</td> 
+                                <td>{{usuarioUnico.historiaClinica.altura }}</td>
+                                <td>{{usuarioUnico.historiaClinica.peso}}</td>
+                                <td>{{usuarioUnico.historiaClinica.presion}}</td>
+                                <td>{{usuarioUnico.historiaClinica.temperatura}}</td>                                                    
+                                <td *ngIf="usuarioUnico.historiaClinica.dinamicos[0].valor">{{usuarioUnico.historiaClinica.dinamicos[0].clave}}: {{usuarioUnico.historiaClinica.dinamicos[0].valor}}</td>
+                                <td *ngIf="usuarioUnico.historiaClinica.dinamicos[1].valor">{{usuarioUnico.historiaClinica.dinamicos[1].clave}}: {{usuarioUnico.historiaClinica.dinamicos[0].valor}}</td>
+                                <td *ngIf="usuarioUnico.historiaClinica.dinamicos[2].valor">{{usuarioUnico.historiaClinica.dinamicos[2].clave}}: {{usuarioUnico.historiaClinica.dinamicos[0].valor}}</td>
+                                                         
+                                 
+                            </tr>
+                            <tr class="table-primary" style="text-wrap: nowrap;">                                
+                                <th>Especialista:</th>
+                                <th>Turno Fecha:</th>
+                                <th>Turno Horario:</th>
+                            </tr>
+                            <tr *ngFor="let item of usuarioUnico.turnos" style="text-wrap: nowrap;">
+                                                            
+                                <td>{{item.apellidoEspecialista }}</td>                               
+                                <td>{{item.diaTurno }}</td>                               
+                                <td>{{item.horaTurno }}</td> 
+                            </tr>
+                            
+                        </table>
+                       
+                        <button class='btn btn-primary btn-lg btn-block'(click)="exportexcel('excel-table'+i)">Descargar Excel</button>         
+                    </div>
+                </div>
+                
+            </div>
+        </div>
     </div>
 </div>

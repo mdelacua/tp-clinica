@@ -24,6 +24,7 @@ export class Paciente extends Usuario{
             }            
         ]
     }
+    turnos:Array<any> = []
     
 
     constructor(nombre:string,apellido:string,edad:number,dni:number,mail:string,imagen:any[], obraSocial:string){

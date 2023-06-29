@@ -14,7 +14,7 @@
                     <img [src]="infoUsuario.imagen[0]" class="imgBtn" >
                 </div>
                 <div>
-                    <span *ngIf="infoUsuario">Tipo de usuario: {{infoUsuario.tipo}}</span>
+                    <span *ngIf="infoUsuario">Tipo de usuario: {{infoUsuario.tipo | uppercase }}</span>
                     <br>
                     <span *ngIf="infoUsuario">Usuario: {{infoUsuario.mail}}</span>                    
                 </div>
@@ -42,6 +42,9 @@
           <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
               <a  (click)="BtnNavsetClicked('sacarTurnoAdmin','bienvenido')" [ngClass]="btnHeader.sacarTurnoAdmin ? 'nav-link active' :  'nav-link'" aria-current="page">Solicitar Turno</a>
           </li> 
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'admin'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('mostrarGraficos','bienvenido')" [ngClass]="btnHeader.mostrarGraficos ? 'nav-link active' :  'nav-link'" aria-current="page">Mostrar Graficos</a>
+          </li> 
             <li *ngIf="infoUsuario && infoUsuario.tipo== 'paciente'" class="nav-item">
                 <a  (click)="BtnNavsetClicked('perfilPaciente','bienvenido')" [ngClass]="btnHeader.perfilPaciente ? 'nav-link active' :  'nav-link'" aria-current="page">Perfil</a>
             </li> 
@@ -57,6 +60,9 @@
           <li *ngIf="infoUsuario && infoUsuario.tipo== 'especialista'" class="nav-item">
               <a  (click)="BtnNavsetClicked('misTurnos','bienvenido')" [ngClass]="btnHeader.misTurnos ? 'nav-link active' :  'nav-link'" aria-current="page">Mis Turnos</a>
           </li> 
+          <li *ngIf="infoUsuario && infoUsuario.tipo== 'especialista'" class="nav-item">
+              <a  (click)="BtnNavsetClicked('espSeccionPaciente','bienvenido')" [ngClass]="btnHeader.espSeccionPaciente ? 'nav-link active' :  'nav-link'" aria-current="page">Sección Pacientes</a>
+          </li> 
           
           <li class="nav-item" style="margin-left: 10px;">
              
@@ -70,31 +76,36 @@
         <!-- USUARIO ADMIN-->
         <div *ngIf="infoUsuario && infoUsuario.tipo == 'admin'">
             
-                <div *ngIf="btnHeader.perfilAdm" class="slide-top">
+                <div *ngIf="btnHeader.perfilAdm" class="animate__animated animate__backInLeft">
 
                     <app-perfil-admin></app-perfil-admin>
                 </div>
-                <div *ngIf="btnHeader.habilitarEspecialista" class="flip-scale-down-hor">
+                <div *ngIf="btnHeader.habilitarEspecialista" class="animate__animated animate__zoomInUp">
                 
                     <app-habilitar-especialista></app-habilitar-especialista>
                 
                 </div>
-                <div *ngIf="btnHeader.turnosAdmin" class="slide-top">
+                <div *ngIf="btnHeader.turnosAdmin" class="animate__animated animate__backInUp">
                 
                     <app-turnos-administrador></app-turnos-administrador>
                 
                 </div>
-                <div *ngIf="btnHeader.exportarUsuarios" class="flip-scale-down-hor">
+                <div *ngIf="btnHeader.exportarUsuarios" class="animate__animated animate__backInLeft">
                 
                     <app-exportar-usuarios></app-exportar-usuarios>
                 
                 </div>
-                <div *ngIf="btnHeader.sacarTurnoAdmin" class="slide-top">
+                <div *ngIf="btnHeader.sacarTurnoAdmin" class="animate__animated animate__zoomInUp">
                 
                     <app-sacar-turno [mostrarMail]="'display:block'"></app-sacar-turno>
                 
                 </div>
-                <div *ngIf="btnHeader.crearUsuarios" class="flip-scale-down-hor">
+                <div *ngIf="btnHeader.mostrarGraficos" class="animate__animated animate__zoomInUp">
+                
+                   <app-graficos></app-graficos>
+                
+                </div>
+                <div *ngIf="btnHeader.crearUsuarios" class="animate__animated animate__backInUp">
                     
                     <div class="wrapper fadeInDown">
                         <div id="formContent">
@@ -173,15 +184,15 @@
 
         <!-- USUARIO PACIENTE-->
         <div *ngIf="infoUsuario && infoUsuario.tipo == 'paciente'">
-            <div *ngIf="btnHeader.sacarTurno" class="flip-scale-down-hor">
+            <div *ngIf="btnHeader.sacarTurno" class="animate__animated animate__backInUp">
 
                 <app-sacar-turno></app-sacar-turno>
             </div>
-            <div *ngIf="btnHeader.misTurnos" class="slide-top">
+            <div *ngIf="btnHeader.misTurnos" class="animate__animated animate__zoomInUp">
 
                 <app-turnos-paciente></app-turnos-paciente>
             </div>
-            <div *ngIf="btnHeader.perfilPaciente" class="flip-scale-down-hor">
+            <div *ngIf="btnHeader.perfilPaciente" class="animate__animated animate__backInLeft">
 
                 <app-perfil-paciente></app-perfil-paciente>
             </div>
@@ -192,13 +203,17 @@
         <!-- USUARIO especialista-->
         <div *ngIf="infoUsuario && infoUsuario.tipo == 'especialista'">
             
-            <div *ngIf="btnHeader.misTurnos" class="flip-scale-down-hor">
+            <div *ngIf="btnHeader.misTurnos" class="animate__animated animate__backInLeft">
 
                 <app-turnos-especialista></app-turnos-especialista>
             </div>
-            <div *ngIf="btnHeader.perfilEsp" class="slide-top">
+            <div *ngIf="btnHeader.perfilEsp" class="animate__animated animate__zoomInUp">
 
                 <app-perfil-especialista></app-perfil-especialista>
+            </div>
+            <div *ngIf="btnHeader.espSeccionPaciente" class="animate__animated animate__backInUp">
+
+                <app-seccion-pacientes></app-seccion-pacientes>
             </div>
         </div>
         <!--FIN USUARIO especialista-->

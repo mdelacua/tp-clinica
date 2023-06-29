@@ -45,6 +45,13 @@ export class TurnosService {
     return q;
   }
 
+  TraerTurnosDosQuerys(key:string, op:WhereFilterOp, value:any,key2:string, op2:WhereFilterOp, value2:any){
+    const app = initializeApp(environment.firebase);
+    const db = getFirestore(app); 
+    const q = query(collection(db,this.tabla), where(key, op, value), where(key2, op2, value2));
+    return q;
+  }
+
   
   async ActualizarTurno(id:any, obj:any){
     const app = initializeApp(environment.firebase);
@@ -62,5 +69,20 @@ export class TurnosService {
       
       
     });
+  }
+
+  async TraerDatosAsync(key:string, op:WhereFilterOp, value:any,key2:string, op2:WhereFilterOp, value2:any){
+    const app = initializeApp(environment.firebase);
+    const db = getFirestore(app); 
+    const q = query(collection(db, this.tabla), where(key, op, value), where(key2, op2, value2));
+    return q;
+   
+  }
+  async TraerDatosAsyncUnaQuery(key:string, op:WhereFilterOp, value:any){
+    const app = initializeApp(environment.firebase);
+    const db = getFirestore(app); 
+    const q = query(collection(db, this.tabla), where(key, op, value));
+    return q;
+   
   }
 }
